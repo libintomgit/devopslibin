@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # from http://docs.mattermost.com/install/prod-ubuntu.html
-
+#description: Libin Tom
+# this is the shell script to install the mattermost application
+# this is to compare it with the ansible way of app deployment
 
 ###########################
 ##### 1: Database Setup
