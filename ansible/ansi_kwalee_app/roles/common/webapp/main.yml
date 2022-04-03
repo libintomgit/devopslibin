@@ -1,0 +1,12 @@
+---
+- name: Initilz
+  hosts: all
+  remote_user: root
+  become: yes
+  become_user: root
+
+  tasks:
+    - include: tasks/common.yaml
+    - include: tasks/install_dependencies.yaml
+    - include: tasks/configure_webapp.yaml 
+    - include: tasks/setup_firewall.yaml

@@ -1,0 +1,51 @@
+---
+
+- name: copying uwsgi config file
+  copy:
+    src: myapp.ini
+    dest: /home/appuser/app/
+    owner: appuser
+    group: appuser     
+    mode: 0644
+
+- name: copying uwsgi.service file 
+  become: true 
+  copy:
+    src: uwsgi.service
+    dest: /etc/systemd/system/uwsgi.service
+
+- name: Copy  nginx conf
+  become: true
+  copy:
+    src: app.conf
+    dest: /etc/nginx/conf.d/app.conf
+
+- name: Make sure app is running
+  systemd:
+    state: started
+    name: uwsgi
+
+- name: Enable service app
+  systemd:
+    name: uwsgi
+    enabled: yes
+
+
+- name: Make sure app is running
+  systemd:
+    state: started
+    name: nginx
+
+- name: Enable service app
+  systemd:
+    name: nginx
+    enabled: yes
+
+- name: Make request 
+  uri: 
+    url: "http://{{ inventory_hostname }}"
+  ignore_errors: yes
+
+- name: SELinux enable nginx in audit2allow
+  become: yes
+  raw: cat /var/log/audit/audit.log | grep nginx | grep denied | audit2allow -M mynginx && semodule -i mynginx.pp

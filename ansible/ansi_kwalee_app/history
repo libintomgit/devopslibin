@@ -1,0 +1,302 @@
+    1  ps aux
+    2  ps aux | grep yum
+    3  yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+    4  yum update
+    5  curl https://bootstrap.pypa.io/get-pip.py | python3.6
+    6  python3.6 --version
+    7  yum install python36u python36u-libs python36u-devel python36u-pip
+    8  python3.6 --version
+    9  curl https://bootstrap.pypa.io/get-pip.py | python3.6
+   10  pyvenv3.6 --version
+   11  pyvenv-3.6 --version
+   12  useradd appuser
+   13  sudo -u appuser pyvenv-3.6 /home/appuser/ve-app
+   14  sudo su appuser
+   15  setenforce 0
+   16  systemctl stop firewalld
+   17  ip addr
+   18  shutdown now
+   19  pwsd
+   20  pwd
+   21  sudo yum install epel-release
+   22  sudo yum install python-pip python-devel nginx gcc
+   23  sudo pip install virtualenv
+   24  pip install --upgrade
+   25  pip install --upgrade pip
+   26  pip3
+   27  pip3 install virtualenv
+   28  pip3 install --upgrade pip3
+   29  pip3 install --upgrade pip
+   30  ll
+   31  cd appuser/
+   32  ll
+   33  cd app
+   34  ll
+   35  virtualenv myapp
+   36  source myapp/bin/activate
+   37  pip3 install uwsgi
+   38  uwsgi --version
+   39  ll
+   40  cat application.py 
+   41  deactivate
+   42  cd ..
+   43  mkdir
+   44  mkdir ~/myapp
+   45  cd ~/myapp/
+   46  ll
+   47  virtualenv ayappenv
+   48  virtualenv myappenv
+   49  ll
+   50  rm -r ayappenv/
+   51  rm -rf ayappenv/
+   52  ll
+   53  source myappenv/bin/activate
+   54  pip3 install uwsgi
+   55  touch wsgi.py
+   56  cd /home/appuser/
+   57  ll
+   58  cd app/
+   59  ll
+   60  vi application.py 
+   61  cd /root/
+   62  ll
+   63  cd myapp/
+   64  uwsgi --socket 0.0.0.0:8080 --protocol=http -w wsgi
+   65  ll
+   66  pip3 install uwsgi
+   67  uwsgi --socket 0.0.0.0:8080 --protocol=http -w wsgi.py
+   68  firewall status
+   69  sudo firewall-cmd --state
+   70  sudo systemctl stop firewalld
+   71  sudo firewall-cmd --state
+   72  uwsgi --socket 0.0.0.0:8080 --protocol=http -w wsgi.py
+   73  l
+   74  ll
+   75  source myappenv/bin/activate
+   76  uwsgi --socket 0.0.0.0:8080 --protocol=http -w wsgi.py
+   77  uwsgi --socket 0.0.0.0:8080 --protocol=http -w wsgi
+   78  touch myapp.ini
+   79  uwsgi --ini myapp.ini
+   80  pwd
+   81  cd myappenv/
+   82  uwsgi --ini myapp.ini
+   83  ll
+   84  cd ..
+   85  ll
+   86  cd myappenv/
+   87  ll
+   88  uwsgi --ini myapp.ini
+   89  mkdir -p /run/uwsgi
+   90  chown user:nginx /run/uwsgi
+   91  touch /etc/systemd/system/uwsgi.service
+   92  vi /etc/systemd/system/uwsgi.service
+   93  adduser libin
+   94  passwd libbin
+   95  passwd libin
+   96  vi passwd
+   97  passwd
+   98  passwd 
+   99  cat /etc/passwd
+  100  d . 
+  101  cd ..
+  102  pwd
+  103  chown -R libin:libin ../myapp/
+  104  ll ../myapp/
+  105  vi /etc/systemd/system/uwsgi.service
+  106  sudo systemctl start uwsgi
+  107  sudo systemctl status uwsgi
+  108  vi /etc/systemd/system/uwsgi.service
+  109  sudo systemctl start uwsgi
+  110  systemctl daemon-reload
+  111  sudo systemctl start uwsgi
+  112  sudo systemctl status uwsgi
+  113  ll
+  114  cd myappenv/
+  115  ll
+  116  pwd
+  117  vi /etc/systemd/system/uwsgi.service 
+  118  mv myapp.ini ../
+  119  systemctl daemon-reload
+  120  sudo systemctl stop uwsgi
+  121  sudo systemctl start uwsgi
+  122  sudo systemctl status uwsgi
+  123  sudo systemctl status uwsgi
+  124  yum install net-tools
+  125  netstat -punta
+  126  sudo systemctl stop uwsgi
+  127  sudo systemctl start uwsgi
+  128  netstat -punta
+  129  ps -ef |grep uw
+  130  netstat -puntae
+  131  sudo systemctl enable uwsgi
+  132  vi /etc/nginx/nginx.conf
+  133  nginx -t
+  134  systemctl start nginx
+  135  netstat -puntae
+  136  systemctl  nginx
+  137  ll /run/uwsgi/myapp.sock 
+  138  vi /etc/systemd/system/uwsgi.service 
+  139  ll /run/
+  140  vi ../myapp.ini 
+  141  systemctl stop uwsgi
+  142  systemctl start uwsgi
+  143  systemctl status uwsgi
+  144  systemctl stop nginx
+  145  systemctl start nginx
+  146  ll /run/uwsgi/
+  147  sudo cat /var/log/audit/audit.log | grep nginx | grep denied | audit2allow -M mynginx
+  148  sudo cat /var/log/audit/audit.log | grep nginx | grep denied
+  149  sudo semodule -i mynginx.pp
+  150  ll
+  151  cd .. 
+  152  ll
+  153  vi wsgi.py 
+  154  sudo cat /var/log/audit/audit.log | grep nginx | grep denied
+  155  sudo semodule -i mynginx.pp
+  156  sudo firewall-cmd --state
+  157  yum install policycoreutils-pytho
+  158  yum install policycoreutils-python
+  159  sudo cat /var/log/audit/audit.log | grep nginx | grep denied | audit2allow -M mynginx
+  160  semodule -i mynginx.pp
+  161  ll
+  162  cd ..
+  163  ll
+  164  cd myapp/
+  165  ll
+  166  cd ..
+  167  cd /home/appuser/
+  168  deactivate
+  169  ll
+  170  cd app/
+  171  ll
+  172  virtualenv myappenv
+  173  ll
+  174  source myappenv/bin/activate
+  175  uwsgi --version
+  176  uwsgi --socket 0.0.0.0:8080 --protocol=http -w application
+  177  ll
+  178  yum install -r requirements.txt 
+  179  pip3 install -r requirements.txt 
+  180  uwsgi --socket 0.0.0.0:8080 --protocol=http -w application
+  181  pip3 install uwsgi
+  182  uwsgi --socket 0.0.0.0:8080 --protocol=http -w application
+  183  pip3 freeze
+  184  deactivate 
+  185  pip uninstall uwsgi
+  186  ll
+  187  source myappenv/bin/activate
+  188  uwsgi --socket 0.0.0.0:8080 --protocol=http -w application
+  189  ll
+  190  cd app
+  191  ll
+  192  source myappenv/bin/activate
+  193  uwsgi --socket 0.0.0.0:8080 --protocol=http -w application
+  194  uwsgi --socket 0.0.0.0:8080 --protocol=http -w application --callable app
+  195  pwd
+  196  touch myapp.ini
+  197  mkdir -p /run/uwsgi
+  198  chown appuser:nginx /run/uwsgi
+  199  uwsgi --ini myapp.ini
+  200  vi /etc/systemd/system/uwsgi.service
+  201  sudo systemctl start uwsgi
+  202  systemctl daemon-reload
+  203  sudo systemctl start uwsgi
+  204  sudo systemctl status uwsgi
+  205  systemctl enable uwsgi
+  206  echo $?
+  207  vi /etc/nginx/nginx.conf
+  208  nginx -t
+  209  systemctl start nginx
+  210  systemctl status nginx
+  211  systemctl enable nginx
+  212  yum install policycoreutils-python
+  213  semodule -i mynginx.pp
+  214  sudo cat /var/log/audit/audit.log | grep nginx | grep denied | audit2allow -M mynginx
+  215  semodule -i mynginx.pp
+  216  echo $?
+  217  systemctl stop nginx
+  218  systemctl start nginx
+  219  systemctl status nginx
+  220  sudo cat /var/log/audit/audit.log | grep nginx | grep denied
+  221  ll /run/uwsgi/
+  222  sudo systemctl stop uwsgi
+  223  sudo systemctl start uwsgi
+  224  sudo systemctl status uwsgi
+  225  ll /run/uwsgi/
+  226  sudo systemctl stop uwsgi
+  227  sudo systemctl start uwsgi
+  228  sudo systemctl status uwsgi
+  229  sudo systemctl stop uwsgi
+  230  sudo systemctl start uwsgi
+  231  sudo systemctl status uwsgi
+  232  shutdown -r
+  233  shutdown -c
+  234  reboot
+  235  ip addr
+  236  shutdonw now
+  237  systmctl enable app
+  238  systemctl enable app
+  239  ll
+  240  cd app/
+  241  ll
+  242  source myappenv/bin/activate
+  243  systemctl start uwsgi
+  244  systemctl status uwsgi
+  245  systemctl stop uwsgi
+  246  systemctl start uwsgi
+  247  systemctl status uwsgi
+  248  systemctl start nginx
+  249  systemctl status nginx
+  250  systemctl status uwsgi
+  251  systemctl stop uwsgi
+  252  systemctl start uwsgi
+  253  systemctl status uwsgi
+  254  systemctl stop uwsgi
+  255  systemctl start uwsgi
+  256  systemctl status uwsgi
+  257  systemctl start nginx
+  258  systemctl status uwsgi
+  259  systemctl status nginx
+  260  sudo firewall-cmd --state
+  261  sudo systemctl stop firewalld
+  262  systemctl stop uwsgi
+  263  systemctl start uwsgi
+  264  systemctl status uwsgi
+  265  sudo cat /var/log/audit/audit.log | grep nginx | grep denied
+  266  sudo cat /var/log/audit/audit.log | grep nginx
+  267  systemctl status uwsgi
+  268  systemctl status uwsgi -l
+  269  systemctl stop uwsgi
+  270  systemctl start uwsgi
+  271  systemctl status uwsgi
+  272  systemctl stop uwsgi
+  273  systemctl start uwsgi
+  274  systemctl status uwsgi
+  275  firewall-cmd --zone=public --add-port=22/tcp --permanent
+  276  firewall-cmd --zone=public --add-port=22/ssh --permanent
+  277  firewall-cmd start
+  278  sudo systemctl start firewalld
+  279  firewall-cmd --zone=public --add-port=22/ssh --permanent
+  280  firewall-cmd --zone=public --add-port=22/tcp --permanent
+  281  firewall-cmd --zone=public --add-port=80/tcp --permanent
+  282  reboot
+  283  test -e
+  284  test -e /usr/bin/python
+  285  ls
+  286  cd ve-app/
+  287  ls
+  288  cd ../
+  289  source ve-app/bin/activate
+  290  pip freeze
+  291  pip3 freeze
+  292  ls
+  293  ll
+  294  cd app/
+  295  ll
+  296  mv myapp ~/myapp-bkp
+  297  mv myappenv/ ~/myappenv-bkp
+  298  ll
+  299  cd ../
+  300  ll
+  301  history 
+  302  history >> history.txt

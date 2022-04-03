@@ -1,0 +1,14 @@
+---
+# - name: Install web app
+#   hosts: allhost
+#   remote_user: root
+#   roles:
+#     - common
+#     - webapp
+
+- name: Install Web-App
+  hosts: all
+  remote_user: root
+  roles:
+    - common
+    - webapp
