@@ -1,9 +1,10 @@
-Lesson1 : Intro to docker
-Lesson2: Docker fundamentals
-Lesson3: Getting started with docker
-Lesson4: Build, Manage and distribute images
-Lesson5: Container configuration
-Lesson6: Networking
-Lesson7: Orchastration
-Lesson8: Container storage and volumes
-Lesson9: Security
+1. Lesson1 : Intro to docker
+2. Lesson2: Docker fundamentals
+3. Lesson3: Getting started with docker
+4. Lesson4: Build, Manage and distribute images
+5. Lesson5: Container configuration
+6. Lesson6: Networking
+7. Lesson7: Orchastration
+8. Lesson8: Container storage and volumes
+9. Lesson9: Security
+
