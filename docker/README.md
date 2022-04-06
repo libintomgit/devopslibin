@@ -102,40 +102,93 @@
                     - extra configuration is not required while using this driver
                 - aufs
                 - Btrfs
-            - installtion on UBUNTU
-                - update the current repository 
-                - pre requsite packages to be installed - `ca-certificates, apt-transport-http, curl, lsb-release, gnupg`
-                - download the docker gpg
-                - download the stable repository package and install it
-                - update the apt package
-                - install the `docker-ce, containerd.io, docker-ce-cli` this will install the latest versions of the docker
-                - check the previous versions - `apt-cache madison docker-ce`
-                - use the `apt-get install docker-ce` with the version required
-                - check if docker is working usign the `docker run hellow-world` command
-                - install docker usign scrip
-                    - download script from `curl -fsSL https://get.docker.com -o geL-docker.sh`
-                    - run `sudo sh geL.docker.sh`
-                - user sudo permission
-                    - provide the user sudo permission for docker using the docker group
-                    - `sudo usermod -aG docker <user-name>`
-            - installtion on CENTOS
-                - remove older version of docker
-                    - `yum remove docker docker-client docker-client-latest docker-latest docker-common docker-engine docker-loglrotate docker-latest-logrotate`
-                - pre-requesites
-                    - centos version 7 or 8
-                    - enable centos extras repository - this is enabled by default
-                    - install the `yum install -y yum-utils`
-                - using docker repository
-                    - download the repository file
-                    - update the repository `yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
-                    - put this file into /etc/yum.reposed/ and ensure that it is enabled
-                    - `yum install docker-ce docker-ce-cli containerd.io`
-                - using the shell script
-                    - download the shellscriipt
-                    - `curl -fsSL https://get.docker.com -o geL-docker.sh`
-                    - run the script
-                    
-            
+    - installtion on UBUNTU
+        - update the current repository 
+        - pre requsite packages to be installed - `ca-certificates, apt-transport-http, curl, lsb-release, gnupg`
+        - download the docker gpg
+        - download the stable repository package and install it
+        - update the apt package
+        - install the `docker-ce, containerd.io, docker-ce-cli` this will install the latest versions of the docker
+        - check the previous versions - `apt-cache madison docker-ce`
+        - use the `apt-get install docker-ce` with the version required
+        - check if docker is working usign the `docker run hellow-world` command
+        - install docker usign scrip
+            - download script from `curl -fsSL https://get.docker.com -o geL-docker.sh`
+            - run `sudo sh geL.docker.sh`
+        - user sudo permission
+            - provide the user sudo permission for docker using the docker group
+            - `sudo usermod -aG docker <user-name>`
+    - installtion on CENTOS
+        - remove older version of docker
+            - `yum remove docker docker-client docker-client-latest docker-latest docker-common docker-engine docker-loglrotate docker-latest-logrotate`
+        - pre-requesites
+            - centos version 7 or 8
+            - enable centos extras repository - this is enabled by default
+            - install the `yum install -y yum-utils`
+        - using docker repository
+            - download the repository file
+            - update the repository `yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
+            - put this file into /etc/yum.reposed/ and ensure that it is enabled
+            - `yum install docker-ce docker-ce-cli containerd.io`
+        - using the shell script
+            - download the shellscriipt
+            - `curl -fsSL https://get.docker.com -o geL-docker.sh`
+            - run the script
+    - docker client
+        - docker client can be configured as well, using custom settings we can customise the own environment
+        - using docker clint
+            - pull the image
+            - run container using the image
+            - see the running containers
+            - also manage the lifecycle of the container
+        - popular docker client commands are
+            - `docker build`
+            - `docker pull`
+            - `docker push`
+            - `docker run`
+    - docker server/host
+        - is nothing other than a comute machine/system
+        - it runs the docker daemon (dockerd)
+        - multiple docker host is called docker cluster
+    - configure docker environment
+        - to use a different config file directory - use `DOCKER_CONGIG` environment variable to configure the new configuration directory
+        - other way is to pass the `--config` in the command line itself (this is higher priority)
+        - also use the export command to point the new locatoin of the configuration file
+            - `echo export DOCKER_CONFIG=$HONE/new_direcory/.docker > ~/.profile` this will export the configuration file to the new directory structure and update the home profile with the new directory details
+        - 2 ways
+            1. config.json
+                - which is the default docker configuration file
+                - default configuration file location
+                    - linux - `$home/.docker/`
+                    - windows - `program data > Docker > Config > daemon.json`
+            2. docker environment variables
+    - docker registery
+        - public registery
+            - ex. docker hub
+        - private registery
+            - is hosted within the organisation and will be private for the organisation
+    - docker images
+        - is a kind of templete which is frozen in time with all the settings and required files (code, library, tools, dependencies) everything required to run an application
+        - a docker images is multy layered storages which are being used as a one unit
+        - it is possible to write on the layers only when the container is running
+        - and next time when you write on it a new leyer will be created
+        - summerise 
+            - each container is an image, with a readable and writable layer on top of a bunch of read-only layer
+            - all these layers generated when commands in the Dockerfiles are executed
+            - or you modify while runnnign the container
+        - each image will have different image ID and they are uniquely created
+        - it is possible to create an imgae from the scratch (i.e, from the base image)
+        - base image is the imgae used to create all the container image
+    - docker file
+        - is a collection of commands or instructions that can be used to build a docker image
+        - Dockerfile format
+            - add comment using #
+            - directives are not case sensitive but bestpractice is to keep them in UPPERCASE to identify them easily
+            - first have to write base image, that is from which image it will start and add the additional instruction (example installign a softeare on a base os image ubuntu)
+        - inside a directory create a file with the naem Dockerfile (this is the unique name to be used to create)
+        - 
+        
+
 4. Lesson4: Build, Manage and distribute images
 5. Lesson5: Container configuration
 6. Lesson6: Networking
