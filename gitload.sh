@@ -4,6 +4,7 @@
 #
 #commi_detail=$1
 #com_mesg= read "Enter commit meessage"
+echo "Pulling the latest changes from the remote repository"
 sudo git pull
 echo "Enter commit message"
 
