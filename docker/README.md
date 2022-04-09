@@ -72,7 +72,6 @@
                     4. storage plugins
                         - allows to link external storage system
                         - these pluggis move data from host to external storage
-
 2. Lesson2: Docker fundamentals
     - docker components
         1. docker engine
@@ -181,18 +180,52 @@
         - base image is the imgae used to create all the container image
     - docker file
         - is a collection of commands or instructions that can be used to build a docker image
+        - inside a directory create a file with the naem Dockerfile (this is the unique name to be used to create)
         - Dockerfile format
             - add comment using #
             - directives are not case sensitive but bestpractice is to keep them in UPPERCASE to identify them easily
             - first have to write base image, that is from which image it will start and add the additional instruction (example installign a softeare on a base os image ubuntu)
-        - inside a directory create a file with the naem Dockerfile (this is the unique name to be used to create)
-        - 
-        
-
+            - FROM ubutnu - is the base imgae name
+            - MAINTAINER Libin_Tom - is who manages it
+            - RUN apt-get undate - is used to run the command
+            - CMD `["echo", "this is the first image created by docker file : Libin]
+    - docker build
+        - `docker build` command builds the docker image using the Dockerfile
+        - and the built image can be shipped to private or public registery
+        - `docker run` is used to create container by specifiying that image
+        - syntax `docker build [options] PATH or URL
+        - if no input is provied by default docker bulid will look for the Dockerfile in the present directory
+        - it builds the image from a docker file and its context.
+            - context is the set of files located in the specified path or give url
+        - .dockerignore file is used to exclude the file or directory while the docker build is running - this will increase the efficiency of the docker build
+    - docker container lifecycle
+        - process is
+            - a running program that is currently executed in the system and a output generated from that process
+            - a process can also have a child process/threads they are also an active process under one parent process
+            - a process in a system can be started stopped killed
+        - a container is nothing but a process
+        - it can be started stopped killed
+    - docker machine
+        - is a utility which allows you to install docker engine on a remote host
+        - also can manage the host using `docker machine` command
+        - it also has ability to manage container (like start, stop, restart, inspect)
 4. Lesson4: Build, Manage and distribute images
+    - docker base image
+        - is directed using `FROM` directive in the Dockerfile
+        - then the base image is modified by the subsequent directives in the file
+        - `FROM scratch/base_image_name` directive is used to create a image from the scratch
+    - Dockerfile
+        - https://docs.docker.com/language/python/build-images/
+        - https://docs.docker.com/engine/reference/builder/
+        - https://docs.docker.com/develop/develop-images/multistage-build/
+        - `FROM 
+        - `WORKDIR /any_directory` to set the current working directory
+        - `VOLUME` - is used to get a persistant volume
+        - `ONBUILD` - is used to trigger the command when using this image as a base image
+        - `
+
 5. Lesson5: Container configuration
 6. Lesson6: Networking
 7. Lesson7: Orchastration
 8. Lesson8: Container storage and volumes
 9. Lesson9: Security
-
