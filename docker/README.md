@@ -221,9 +221,21 @@
         - `FROM 
         - `WORKDIR /any_directory` to set the current working directory
         - `VOLUME` - is used to get a persistant volume
+        - `ENV` - setting the environment variable at the container level
+            - Example:
+            `ENV PYTHONPATH=$PYTHONPATH:/home/${user}/.local/bin`
+        - `ADD` - is as similer as copy but in the add we can use http/s link
+            - Example:
         - `ONBUILD` - is used to trigger the command when using this image as a base image
-        - `
-
+        - `STOPSIGNAL` - sends a system cal signal that helps the container to exit
+        - `ENTYPOINT` - is a constant command which concatinated argument in the CMD or runtime
+            - Example:
+            `ENTRYPOINT ["python3", "-m", "flask", "run", "--host=0.0.0.0"]`
+            `CMD ["--port= 5000"]`
+        - `HELTHCHECK` - will check and exit the container based on the command conditions
+            - Example:
+            `HEALTHCHECK --interval=5s --timeout=5s --start-period=2s --retries=2 \`
+                `CMD wget --no-verbose --tries=1 --spider http://localhost/tom || exit 1`
 5. Lesson5: Container configuration
 6. Lesson6: Networking
 7. Lesson7: Orchastration
