@@ -236,8 +236,26 @@
             - Example:
             `HEALTHCHECK --interval=5s --timeout=5s --start-period=2s --retries=2 \`
                 `CMD wget --no-verbose --tries=1 --spider http://localhost/tom || exit 1`
+    - own registery
+        - docker run -d -p 5000:5000 --restart-yes --name registry registry:2
+        - will be hosted on-prem and the images can be pushed using the same
+        - docker push 192.168.1.39:5000/python_app:v1.0
+    - Clean docker
+        - 
 5. Lesson5: Container configuration
 6. Lesson6: Networking
+    - docker engine utilises linux namespace for to run the container
+    - linux network namespace cteates a isolated namespace which will contain vnet, ARP table and ROUTE table
+    - 3 network that docker creates are
+        - bridge network
+            - by default when you run a docker container it attachts to the beidge network
+                - which means it will create its own namespace, attach the name space to the default bridge netwokr of the docker
+                - when docker is installed docker engine will create a bridge network (like VNet) with the ip 172.17.0.1
+        - host network
+        - none network
+    - 
+
+
 7. Lesson7: Orchastration
 8. Lesson8: Container storage and volumes
 9. Lesson9: Security
