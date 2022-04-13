@@ -1,0 +1,28 @@
+---
+- name: authorized_keys
+  become: true
+  authorized_key: user=root
+                  exclusive=no
+                  key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+# - name: SYSTEM | remove E:Malformed source list
+#   become: ture
+#   remote_user: root
+#   file:
+#     state: absent
+#     path: /etc/apt/sources.list.d/download_docker_com_linux_ubuntu.list
+
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: no
+    update_cache: yes
+    cache_valid_time: 86400 #One day
+
+- name: COMMON | Install basic packages
+  package: name={{ item }} state=present
+  with_items:
+    - vim
+    - nano
+    - curl
+    - gnupg

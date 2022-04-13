@@ -1,0 +1,7 @@
+---
+- name: Install Docker
+  hosts: allhosts
+  remote_user: vagrant
+  roles:
+    - common
+    - docker

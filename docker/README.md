@@ -249,13 +249,64 @@
     - 3 network that docker creates are
         - bridge network
             - by default when you run a docker container it attachts to the beidge network
-                - which means it will create its own namespace, attach the name space to the default bridge netwokr of the docker
                 - when docker is installed docker engine will create a bridge network (like VNet) with the ip 172.17.0.1
+                - which means it will create its own namespace, attach the name space to the default bridge netwokr of the docker
+                - with the IP from the IP pool assign to the bridge netwok
+                - which means a new linux network namespace is created for the container and the veth is linked to the bridge network by the docker engine
+                - 
         - host network
+            - is a network where we can run ony one container in specific port
+            - which means, the host and the continer port will be tightly coupled so the port of the container will the port of the host
         - none network
-    - 
+            - that container is isolated in nature and it will not connect to any network
+            - in kubernets this concept is used because in k8s different network providers are used (like calico, flwnel) and they need the basic container network to be NONE connet the containers to the different network
+    - custom/ user defined newtorking
+        - it is possible to create user defined multiple bridge networks with user defiled CIDR range and choose which bridge the container should run on
+        - `docker network create --driver bridge --subnet 182.18.0.0/16 custom-isolated-network`
+          `docker network ls`
+        - command to connect and disconnect the container to different custome network
+            - `docker run -d <image_name> --network <custom_network>`
+            - `docker network connect <network-name> <container-name>`
+            - `docker network disconnect <network-name> <container-name>`
+            - `docker network prune or docker network rm <network-name>`
+    - DNS
+        - DNS container is created while installing the dokcer engine
+        - and its usually present on 127.0.0.11 IP
+        - and the name entry of the continer is created in the DNS server
 
-
-7. Lesson7: Orchastration
 8. Lesson8: Container storage and volumes
+    - when docker engine is installed it created a directory in /var/lib/docker
+    - this is where all over persistant data gets stored
+    - layers
+        - image layer
+            - so docker says, what ever the layer that we build at the image layer or the build layer, those are always read-only in nature and they cannot be over written when the container launches
+            - and those data will be always available
+        - container layer
+            - is read/write layer and changes can be made while running the container
+            - container layer will be on the memory (RAM)
+    - create a volume 
+        - mount
+            - when you map your volume to the container directory its called mount
+            - using `docker volume create <volume_name>`
+            - this will create a volume directory in the /var/lib/docker/volumes directoy
+            - however you can use any directory as a voume in the Dockerfile and if the directory is not present then the docker will create one while running
+            - `docker run -v <volume_name>:<container/container>`
+        - bind
+            - when you map the host path to the container path its called bind(ing)
+            - `docker run -v <host/path>:<container/container>`
+            - and in latest version on the docker --mount is used in the place of -v
+            - `docker run --mount type=bind, source=<path/of/host/directory>, target=<path/to/container/directory>`
+
+
 9. Lesson9: Security
+7. Lesson7: Orchastration
+    - in any kind of orchastration whats first needed is cluster (cluster is collection of nodes)
+    - out of the custer one of the node will be management/master node
+    - docker swarm
+        - `docker swarm init --advertise-addr 192.168.33.30` to initiate the controller in the master node 
+        - `docker system info` will provide the information of the docker master
+        - after the init, using the `docker sworm join` command join the other nodes to the cluster
+        - ```docker swarm join --token SWMTKN-1-60dgglp1o6kdyz7v4mu9iu70ynn9713334fseymua0umx7enob-3s46u1nfvbtkug5bkzfxa4zhh 192.168.33.30:2377```
+        - `docker swarm join-token manager`
+        - check the list of nodes using `docker node ls`
+        - 

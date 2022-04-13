@@ -48,6 +48,6 @@ CMD ["--port= 5000"]
 
 #RUN apt-get update
 #CMD ["echo", "This is the first image from the dockerfile: Libin"]
-HEALTHCHECK --interval=5s --timeout=5s --start-period=2s --retries=2 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost/tom || exit 1
+# HEALTHCHECK --interval=5s --timeout=5s --start-period=2s --retries=2 \
+#     CMD wget --no-verbose --tries=1 --spider http://localhost/tom || exit 1
 

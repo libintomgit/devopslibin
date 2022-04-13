@@ -1,0 +1,59 @@
+---
+# Docker Configuration
+
+- name: SYSTEM | Install docker dependencies
+  become: true
+  package: name={{ item }} state=present
+  with_items:
+    - python-apt
+    - ca-certificates
+    - lsb-release
+
+- name: SYSTEM | Adding docker apt key
+  become: true
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+# - name: GPG | download and move GPG docker file
+#   become: true
+#   command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+- name: DOCKER | Set the docker repository
+  become: true
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable
+#deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+- name: Install Docker CE
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  with_items:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+  become: true
+
+- name: Install prerequisites for docker-compose
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  with_items:
+    - python3-pip
+    - python3-setuptools
+    - virtualenv
+  become: true
+
+# - name: Install docker-compose
+#   pip:
+#     name: docker-compose
+

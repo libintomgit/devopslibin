@@ -1,0 +1,10 @@
+[allhosts]
+192.168.33.30 ansible_ssh_private_key_file=/home/libin/devopslibin/vagrant/.vagrant/machines/master1/virtualbox/private_key
+192.168.33.31 ansible_ssh_private_key_file=/home/libin/devopslibin/vagrant/.vagrant/machines/clint1/virtualbox/private_key
+192.168.33.32 ansible_ssh_private_key_file=/home/libin/devopslibin/vagrant/.vagrant/machines/clint2/virtualbox/private_key
+
+#[webservers]
+#$YOUR_LXC_IP
+
+#[dbservers]
+#$YOUR_LXC_IP
