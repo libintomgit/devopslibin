@@ -299,6 +299,28 @@
 
 
 9. Lesson9: Security
+8. Lesson00: Docker Compose
+    - create a docker compose file
+    - run the compose using `docker-compose up`
+    - syntax - Version 2
+    ``` version: 2
+        services:
+            name_of_the_container:
+                image: <image_name>
+                or
+                build: ./<docker_file_directory> #this builds the image from the docker file and then runs the container
+                ports:
+                    - <host>:<container>
+                depends_on:
+                    - <other container name>
+                networks:
+                    - front-end
+                    - back-end
+        
+        network:
+            front-end
+            back-end ```
+        - 
 7. Lesson7: Orchastration
     - in any kind of orchastration whats first needed is cluster (cluster is collection of nodes)
     - out of the custer one of the node will be management/master node
@@ -309,4 +331,117 @@
         - ```docker swarm join --token SWMTKN-1-60dgglp1o6kdyz7v4mu9iu70ynn9713334fseymua0umx7enob-3s46u1nfvbtkug5bkzfxa4zhh 192.168.33.30:2377```
         - `docker swarm join-token manager`
         - check the list of nodes using `docker node ls`
+        - availability
+            - active - running and accepting the new containers
+            - pause - not available to take the new containers
+            - drain - is to take down the node. So it shcedules the existing containers in other nodes and terminates the containers in the node.
+        - manager status
+            - leader: is the active manger, who is the controle plane
+            - reachable: comes in picture when the multi manager senario
+            - unreachable: at a point of time only one node will be manager and hence reachable and unavailable comes in that picture
+        - inspect the node details `docker node inspect <nodename> --pretty`
+        - promote worker as the manager `docker node promte <workernodename>`
+        - demote manager as the worker `docker node demote <workernodename>`
+        - drain the node `docker node update --availability drain <nodename>`
+        - activate back from drain status `docker node update --availability active <nodename>`
+        - when the drained noded comes active the old workloads will not be reschduled to the node
+        - leave the worker node from the cluster. First drain the node then within the worker node leave the docker swarm `docker swarm leave`
+        - remove the node entry `docker node rm <node_name>`
+        - get the cluster join token again ` docker swarm join-token worker`
+    - #docker swarm operations
+        - create service `docker service crate --replicas=3 <imagename>`
+        - list services running `docker service ls`
+        - list the pods running in a particular service `docker service ps <service_name>`
+        - print the service details `docker service inspect <service_name> --pretty`
+        - check logs of service `docker service logs <service_name>`
+        - servicer rolling updates
+            - update the image immediately in all the containers`docker service update -p 80:80 --image=<image_name:new_version> <old_image>`
+            - update the images with delay ```docker service update -p 80:80 --update-delay 60s --image=<image_name:new_version> <old_image>```
+            - update parallaly for faster update ```docker service update -p 80:80 --update-parallelism 3 --image=<image_name:new_version> <old_image>```
+            - update failure situation ```docker service update -p 80:80 --update-failure-action <pause or continue or rollback> --mage=<image_name:new_version> <old_image>```
+            - rolling back `docker service update --rollback <image_name>`
+            - update replicas `docker service update --replicas=<desired_number> <service_name>`
+            - daemon set `docker service create --mode=global agent`
+        - lables & constraints
+            - add lables to the nodes `docker node update --lable-add <lable-ex-type=cpu-optimised/type=memory-optimised> <worker_node1>`
+            - and add contraint while running the service ```docker service create --constraint=node.lables.type==cpu-optimized <service_name>```
+        - network - overlay2
+            - while initialising the swarm it creates two network
+                - overylay (ingress)
+                    - is spanned accross the entire cluster
+                    - which allows communication between all the containers
+                    - this concept is called ROUTING MESH
+                    - create a custom overly network `sudo docker network create -d overlay <network_name>`
+                - default network (bridge)
+                    - is used to connect nodes in the cluster
+        - service recovery
+        - Quorum
+            - concept: when ever the mangaer going to take any decicion, depending on the number of managers there is one particular number should agree your decicion inorder to form a quorum only then the request id effective
+            | MANAGERS | MEJORITY | FAULT TOLLARANCE |
+            | 1 | 1 | 0 |
+            | 2 | 2 | 0 |
+            | 3 | 2 | 1 |
+            | 4 | 3 | 1 |
+            | 5 | 3 | 2 |
+            | 6 | 4 | 2 |
+            | 7 | 4 | 3 |
+
+            - above is the list which says how many managers should agree in minimum to execute a request and if the minimum managers are not reachable then the request will not be processed.
+
+            - quorum N = n / 2 + 1 and decimal to round up to least.
+            - docker reccomends 7 managers max as the any more would give the high availability of only 7 managers
+10. Docker Stack:
+    - https://github.com/dockersamples/example-voting-app.git
+    - `docker stack deploy --compose-file docker-compose.yml`
+11. Kubernetes
+    - Master: 4 specific components which will do the job of end to end orchestration
+        - kube-API:
+            - any request will come through the kube api server route
+            - admin can connect to the master through CLI kubectl or REST API
+            - it is a facilitator
+            - it receives the user requests, authenticates and validates
+            - once done writes into the etcd
+            - then gives the instructions to schedular
+            - once the schedular reverts with the decision information, it provides the same back to controller
+            - API then sends the controller processed request to KUBELET
+        - etcd
+            - only database in the k8 cluster
+            - highly distributed key value pair
+            - 
+        - schedular
+            - continuesly checks with the kube api for any new request/ job
+            - it is the decision maker as such to whihc node the pods should be created based of the node helth and raning
+            - once the decision is made, it forwards the information back the API
+        - controller
+            - is the brain of the k8s
+            - it received the instruction from the API which was earlier processed by the schedular
+            - it checks for the actual implementation proceedure and sends back to API
+            - 
+    - Worker: 3 components
+        - kublet
+            - is the captain of the worker node
+            - has all the status of the worker node
+            - receives the instructions from the api server which shceduler and controller earlier processed
+            - then it instructs the container run time to process the actual requirement
+        - kube-proxy
+        - container runtime (docker engine/ rocker engine/ crio engine / etc.)
+    - pod
+        - is the smallest deployable unit in the k8s
+        - 99% the pod will contain single container but it can contain many containers
+        - one main container should be in one pod 
+        - `kubectl run pod --image <image_name>`
+        - `kubectl get pods`
+    - replica set
+        - will delcleratively create the pod with replicas and maintains the desired state (self healing)
+        - rolling upadte is not available
+    - deployment
+        - includes replicaset and rolling update
+        - `kublectl apply -f <deployment_file.yaml>` run the deployment decleratively
+        - `kubectl get deployments` list the deployments in the cluster
+        - `kubectl describe deployment <deployment_name>` show the details of the deployment
+        - `kubectl rollout status deployment <deployment_name>` to rollout the new version
+        - `kubectl rollout history deployment <deployment_name>` check the rollout history
+        - `kubectl set image deployment <deploymetn_name> <old_image:version=ne_image:version>` rollout the image imperatively     
+        - `kubectl rollout undo deployment <deployment_name>` rollback to the previous revision
+        - `kubectl rollout undo deployment <deployment_name> --to-revision=2` undo to particular revision image
         - 
