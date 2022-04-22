@@ -1,7 +1,7 @@
 ---
 - name: authorized_keys
   become: true
-  authorized_key: user=root
+  authorized_key: user=vagrant
                   exclusive=no
                   key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 

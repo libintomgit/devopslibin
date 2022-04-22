@@ -444,4 +444,12 @@
         - `kubectl set image deployment <deploymetn_name> <old_image:version=ne_image:version>` rollout the image imperatively     
         - `kubectl rollout undo deployment <deployment_name>` rollback to the previous revision
         - `kubectl rollout undo deployment <deployment_name> --to-revision=2` undo to particular revision image
-        - 
+    - services
+        - node port:
+            - will get a public port
+            - 
+        - cluster IP:
+            - works within the cluster
+            
+        - loadbalancer:
+            - will balance the tarffick from node point

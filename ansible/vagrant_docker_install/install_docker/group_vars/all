@@ -31,3 +31,4 @@
 # ####################################################
 # LATEST_MM_VERSION: "3.4.0"
 # LATEST_MM_URL: https://releases.mattermost.com/{{ LATEST_MM_VERSION }}/mattermost-team-{{ LATEST_MM_VERSION }}-linux-amd64.tar.gz
+HOSTNAME_3: kubeclint3

@@ -33,24 +33,25 @@
 
 - name: Install Docker CE
   apt:
-    name: "{{item}}"
+    name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
     state: present
     update_cache: yes
-  with_items:
-    - docker-ce
-    - docker-ce-cli
-    - containerd.io
+  # with_items:
+  #   - docker-ce
+  #   - docker-ce-cli
+  #   - containerd.io
   become: true
 
 - name: Install prerequisites for docker-compose
   apt:
-    name: "{{item}}"
+    # name: "{{item}}"
+    name: ['python3-pip', 'python3-setuptools', 'virtualenv']
     state: present
     update_cache: yes
-  with_items:
-    - python3-pip
-    - python3-setuptools
-    - virtualenv
+  # with_items:
+  #   - python3-pip
+  #   - python3-setuptools
+  #   - virtualenv
   become: true
 
 # - name: Install docker-compose
