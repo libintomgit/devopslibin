@@ -1,29 +1,29 @@
 import os.path
 import os
 import time
-import datetime
 import re
 from tabulate import tabulate
 
-print("EZY HEALTH RECORD MANAGEMENT SYSTEM\n")
 menu1 = "\n0 to Registering New Information\n1 to Retrieving Existing Information\n" \
         "2 to Registering New User\n3 to Change the User\n4 to Exit "
 user_reg_yn = "Do you want to register this user? 'Y'(Yes) | 'N'(No) : "
 suppor_contact_mesg = "Please contact the developer at customersforyou@ezy.com"
 
 username = ""
+# Collect user name and run optio menu
 def user_checkin():
+    """Collect user name and run optio menu """
     make_db_dir()
     print("Enter Your Name", end=" : ")
     global username
-    username = input()
+    username = input().lower()
     menu_list()
-
+# log the current date and time
 def get_date():
     """log the current date and time"""
     import datetime
     return datetime.datetime.now()
-
+# registering new user to the database
 def register_new_user():
     """registering new user to the database"""
     # name_input = input("Enter your Name: ")
@@ -37,17 +37,16 @@ def register_new_user():
             print(f"New user \"{username.title()}\" has been registered Successfully.\n")
         menu_list()
         return username
-
 # Make db directory
 def make_db_dir():
+   """Make db directory"""
    if os.path.exists('./db') is True:
        pass
    else:
        os.mkdir('./db')
-
-# Check if the user is
+# Check if the user is registered
 def check_user_registered(username):
-    """returns the users name if its registered in the system file"""
+    """returns the users name if its registered in the system file, else run register new user function"""
     # user_name_input = input("Enter your name: ")
     make_db_dir()
     if os.path.exists('./db/user_data') is True:
@@ -64,9 +63,9 @@ def check_user_registered(username):
             exit(0)
         else:
             register_new_user()
-
-# Log ID generation for diet and workout entry uniq matching
+# Log ID generation
 def log_id_func():
+    """Unique log id for the future use of string matching"""
     if os.path.exists('./db/id') is True:
         with open('./db/id') as f:
             last_line = f.readlines()[-1]
@@ -82,12 +81,9 @@ def log_id_func():
             default_log_id = "10000"
             return default_log_id
     # return user_id
-
 # Log user diet and workout information
 def log_user_diet_workout():
-    # name_input = input("Enter your Name: ")
-    # log_id = 1
-
+    """log user data to log_db file in db directory"""
     if check_user_registered(username) == username:
         # print(f"\nHello {username.title()}, you are already a registered user."
         #       f"\nYou can chose the other options to check or log your health information.")
@@ -125,13 +121,12 @@ def log_user_diet_workout():
             user_checkin()
         else:
             register_new_user()
-
+# Retrive user data
 def retrieve_user_diet_workout():
-    import os
-    import subprocess
-    print(username.title(), "Please find your workout and diet history below.")
+    """Retrieve logged registered user data from the ./db/log_db file"""
     if check_user_registered(username) == username:
-        pattern = username
+        print(username.title(), "Please find your workout and diet history below.")
+        pattern = username.lower()
         pattern_line = []
         with open('./db/log_db') as f:
             for line in f:
@@ -176,7 +171,6 @@ def retrieve_user_diet_workout():
             user_checkin()
         else:
             register_new_user()
-
 # Front - Entry logic
 def menu_list():
     while True:
@@ -214,5 +208,25 @@ def menu_list():
         except ValueError:
             print("\nYou have to choose the available options 0 or 4\n")
             continue
+# Print banner at the beggining
+def print_banner():
+    """Banner printing function"""
+    print("""\
+
+   ███████╗███████╗██╗   ██╗    ██╗  ██╗███████╗ █████╗ ██╗  ████████╗██╗  ██╗
+   ██╔════╝╚══███╔╝╚██╗ ██╔╝    ██║  ██║██╔════╝██╔══██╗██║  ╚══██╔══╝██║  ██║
+   █████╗    ███╔╝  ╚████╔╝     ███████║█████╗  ███████║██║     ██║   ███████║
+   ██╔══╝   ███╔╝    ╚██╔╝      ██╔══██║██╔══╝  ██╔══██║██║     ██║   ██╔══██║
+   ███████╗███████╗   ██║       ██║  ██║███████╗██║  ██║███████╗██║   ██║  ██║
+   ╚══════╝╚══════╝   ╚═╝       ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝  ╚═╝
+                           RECORD MANAGEMENT SYSTEM
+
+   by Libin Tom.""")
+
+# print(log_id_func.__doc__)
+print_banner()
 user_checkin()
-# log_id_func()
+
+
+
+
