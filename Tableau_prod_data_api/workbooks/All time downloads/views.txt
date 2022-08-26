@@ -1,0 +1,3 @@
+<view name="Dash1" hidden="true" />
+<view name="Dash2" hidden="true" />
+<view name="Dash3" hidden="true" />

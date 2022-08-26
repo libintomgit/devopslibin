@@ -1,0 +1,40 @@
+<tsRequest>
+  <permissions>
+    <workbook id="76c77be1-877d-402f-b2fb-7822756048cf" />
+    <granteeCapabilities>
+      <user id="097e1255-3029-48d6-945a-5f216c9be2b1" />
+      <capabilities>
+        <capability name="ExportData" mode="Allow"/>
+        <capability name="Filter" mode="Allow"/>
+        <capability name="ExportXml" mode="Allow"/>
+        <capability name="ViewUnderlyingData" mode="Allow"/>
+        <capability name="WebAuthoring" mode="Allow"/>
+        <capability name="Delete" mode="Allow"/>
+        <capability name="Write" mode="Allow"/>
+        <capability name="ViewComments" mode="Allow"/>
+        <capability name="Read" mode="Allow"/>
+        <capability name="AddComment" mode="Allow"/>
+        <capability name="ShareView" mode="Allow"/>
+        <capability name="ChangeHierarchy" mode="Allow"/>
+        <capability name="ExportImage" mode="Allow"/>
+        <capability name="ChangePermissions" mode="Allow"/>
+        <capability name="CreateRefreshMetrics" mode="Allow"/>
+      </capabilities>
+    </granteeCapabilities>
+    <granteeCapabilities>
+      <group id="abe4b683-9e65-4a42-8944-86b9f9397d9a" />
+      <capabilities>
+        <capability name="AddComment" mode="Allow"/>
+        <capability name="Read" mode="Allow"/>
+        <capability name="Filter" mode="Allow"/>
+        <capability name="ExportImage" mode="Allow"/>
+        <capability name="ExportData" mode="Allow"/>
+        <capability name="ViewComments" mode="Allow"/>
+      </capabilities>
+    </granteeCapabilities>
+  </permissions>
+</tsRequest>
+
+<!-- 76c77be1-877d-402f-b2fb-7822756048cf stage workbook id
+
+a3b7eeaa-7f7c-41c8-862d-dd9eab2a25a5 -->

@@ -1,0 +1,15 @@
+{
+    "workbook": {
+      "name": "Downloads All Time",
+      "showTabs": "true",
+      "project": {
+        "id": "efae5dad-d639-4d34-ad95-d9ab239c62a5"
+      },
+      "views": {
+        "view": {
+          "name": "Welcome",
+          "hidden": "true"
+        }
+      }
+    }
+}

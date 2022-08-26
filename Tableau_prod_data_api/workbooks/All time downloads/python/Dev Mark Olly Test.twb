@@ -1,0 +1,497 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20211.21.0507.1603                               -->
+<workbook original-version='18.1' source-build='2021.1.2 (20211.21.0511.0935)' source-platform='mac' version='18.1' xml:base='https://prod-uk-a.online.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <ISO8601PeriodTypes />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <repository-location id='DevMarkOllyTest' path='/t/kwaleereporting/workbooks' revision='1.0' site='kwaleereporting' />
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='Users Query Test' inline='true' name='federated.09coffc0ljxjso1b1bfgr1aakbn6' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='redshift-cluster-1.cergm5wcwtrj.us-west-2.redshift.amazonaws.com' name='redshift.02jfjgc1jwb63p120qlgf0al0ljg'>
+            <connection class='redshift' dbname='public' odbc-connect-string-extras='' one-time-sql='' port='5439' schema='finance_kpis' server='redshift-cluster-1.cergm5wcwtrj.us-west-2.redshift.amazonaws.com' single-node='no' sslmode='' username='datateam' workgroup-auth-mode='prompt' />
+          </named-connection>
+        </named-connections>
+        <relation join='left' type='join'>
+          <clause type='join'>
+            <expression op='='>
+              <expression op='[new_users].[codename]' />
+              <expression op='[apps].[codename]' />
+            </expression>
+          </clause>
+          <relation connection='redshift.02jfjgc1jwb63p120qlgf0al0ljg' name='new_users' table='[kpis_metrics].[new_users]' type='table' />
+          <relation connection='redshift.02jfjgc1jwb63p120qlgf0al0ljg' name='apps' table='[finance_kpis].[apps]' type='table' />
+        </relation>
+        <cols>
+          <map key='[acquisition]' value='[new_users].[acquisition]' />
+          <map key='[app_name (apps)]' value='[apps].[app_name]' />
+          <map key='[app_name]' value='[new_users].[app_name]' />
+          <map key='[codename (apps)]' value='[apps].[codename]' />
+          <map key='[codename]' value='[new_users].[codename]' />
+          <map key='[country]' value='[new_users].[country]' />
+          <map key='[event_date]' value='[new_users].[event_date]' />
+          <map key='[launch_date]' value='[apps].[launch_date]' />
+          <map key='[platform]' value='[new_users].[platform]' />
+          <map key='[player_count]' value='[new_users].[player_count]' />
+          <map key='[publisher (apps)]' value='[apps].[publisher]' />
+          <map key='[publisher]' value='[new_users].[publisher]' />
+          <map key='[second_app_name]' value='[apps].[second_app_name]' />
+          <map key='[size]' value='[apps].[size]' />
+          <map key='[source]' value='[new_users].[source]' />
+          <map key='[source_type]' value='[apps].[source_type]' />
+          <map key='[status]' value='[apps].[status]' />
+        </cols>
+        <refresh increment-key='' incremental-updates='false' />
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>event_date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[event_date]</local-name>
+            <parent-name>[new_users]</parent-name>
+            <remote-alias>event_date</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_TYPE_DATE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_TYPE_DATE&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>codename</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[codename]</local-name>
+            <parent-name>[new_users]</parent-name>
+            <remote-alias>codename</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>128</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>country</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[country]</local-name>
+            <parent-name>[new_users]</parent-name>
+            <remote-alias>country</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>24</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>platform</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[platform]</local-name>
+            <parent-name>[new_users]</parent-name>
+            <remote-alias>platform</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>24</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>acquisition</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[acquisition]</local-name>
+            <parent-name>[new_users]</parent-name>
+            <remote-alias>acquisition</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>32</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>player_count</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[player_count]</local-name>
+            <parent-name>[new_users]</parent-name>
+            <remote-alias>player_count</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>app_name</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[app_name]</local-name>
+            <parent-name>[new_users]</parent-name>
+            <remote-alias>app_name</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>255</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>publisher</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[publisher]</local-name>
+            <parent-name>[new_users]</parent-name>
+            <remote-alias>publisher</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>128</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>source</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[source]</local-name>
+            <parent-name>[new_users]</parent-name>
+            <remote-alias>source</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>128</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>codename</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[codename (apps)]</local-name>
+            <parent-name>[apps]</parent-name>
+            <remote-alias>codename</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>128</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>app_name</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[app_name (apps)]</local-name>
+            <parent-name>[apps]</parent-name>
+            <remote-alias>app_name</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>255</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>publisher</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[publisher (apps)]</local-name>
+            <parent-name>[apps]</parent-name>
+            <remote-alias>publisher</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>128</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>second_app_name</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[second_app_name]</local-name>
+            <parent-name>[apps]</parent-name>
+            <remote-alias>second_app_name</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>255</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>source_type</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[source_type]</local-name>
+            <parent-name>[apps]</parent-name>
+            <remote-alias>source_type</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>128</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>status</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[status]</local-name>
+            <parent-name>[apps]</parent-name>
+            <remote-alias>status</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>32</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>launch_date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[launch_date]</local-name>
+            <parent-name>[apps]</parent-name>
+            <remote-alias>launch_date</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_TYPE_DATE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_TYPE_DATE&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>size</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[size]</local-name>
+            <parent-name>[apps]</parent-name>
+            <remote-alias>size</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>256</width>
+            <contains-null>true</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation flag='0' name='binary' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+            <object-id>[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='new_users' datatype='table' name='[__tableau_internal_object_id__].[new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834]' role='measure' type='quantitative' />
+      <column caption='Acquisition' datatype='string' name='[acquisition]' role='dimension' type='nominal' />
+      <column caption='App Name (Apps)' datatype='string' name='[app_name (apps)]' role='dimension' type='nominal' />
+      <column caption='App Name' datatype='string' name='[app_name]' role='dimension' type='nominal' />
+      <column caption='Codename (Apps)' datatype='string' name='[codename (apps)]' role='dimension' type='nominal' />
+      <column caption='Codename' datatype='string' name='[codename]' role='dimension' type='nominal' />
+      <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column caption='Event Date' datatype='date' name='[event_date]' role='dimension' type='ordinal' />
+      <column caption='Launch Date' datatype='date' name='[launch_date]' role='dimension' type='ordinal' />
+      <column caption='Platform' datatype='string' name='[platform]' role='dimension' type='nominal' />
+      <column caption='Player Count' datatype='integer' name='[player_count]' role='measure' type='quantitative' />
+      <column caption='Publisher (Apps)' datatype='string' name='[publisher (apps)]' role='dimension' type='nominal' />
+      <column caption='Publisher' datatype='string' name='[publisher]' role='dimension' type='nominal' />
+      <column caption='Second App Name' datatype='string' name='[second_app_name]' role='dimension' type='nominal' />
+      <column caption='Size' datatype='string' name='[size]' role='dimension' type='nominal' />
+      <column caption='Source' datatype='string' name='[source]' role='dimension' type='nominal' />
+      <column caption='Source Type' datatype='string' name='[source_type]' role='dimension' type='nominal' />
+      <column caption='Status' datatype='string' name='[status]' role='dimension' type='nominal' />
+      <column-instance column='[event_date]' derivation='None' name='[none:event_date:qk]' pivot='key' type='quantitative' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United Kingdom&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+      <filter class='relative-date' column='[none:event_date:qk]' filter-group='2' first-period='-6' include-future='true' include-null='false' last-period='0' period-type-v2='day' />
+      <object-graph>
+        <objects>
+          <object caption='new_users' id='new_users (kpis_metrics.new_users)_BEF737964808468D9696B9389089F834'>
+            <properties context=''>
+              <relation join='left' type='join'>
+                <clause type='join'>
+                  <expression op='='>
+                    <expression op='[new_users].[codename]' />
+                    <expression op='[apps].[codename]' />
+                  </expression>
+                </clause>
+                <relation connection='redshift.02jfjgc1jwb63p120qlgf0al0ljg' name='new_users' table='[kpis_metrics].[new_users]' type='table' />
+                <relation connection='redshift.02jfjgc1jwb63p120qlgf0al0ljg' name='apps' table='[finance_kpis].[apps]' type='table' />
+              </relation>
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <repository-location id='Sheet1' path='/t/kwaleereporting/workbooks/DevMarkOllyTest' revision='' site='kwaleereporting' />
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Users Query Test' name='federated.09coffc0ljxjso1b1bfgr1aakbn6' />
+          </datasources>
+          <datasource-dependencies datasource='federated.09coffc0ljxjso1b1bfgr1aakbn6'>
+            <column caption='Event Date' datatype='date' name='[event_date]' role='dimension' type='ordinal' />
+            <column caption='Player Count' datatype='integer' name='[player_count]' role='measure' type='quantitative' />
+            <column-instance column='[player_count]' derivation='Sum' name='[sum:player_count:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[event_date]' derivation='Day-Trunc' name='[tdy:event_date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[event_date]' derivation='Year-Trunc' name='[tyr:event_date:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.09coffc0ljxjso1b1bfgr1aakbn6].[tyr:event_date:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.09coffc0ljxjso1b1bfgr1aakbn6].[tdy:event_date:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.09coffc0ljxjso1b1bfgr1aakbn6].[sum:player_count:qk]</rows>
+        <cols>([federated.09coffc0ljxjso1b1bfgr1aakbn6].[tyr:event_date:qk] + [federated.09coffc0ljxjso1b1bfgr1aakbn6].[tdy:event_date:qk])</cols>
+      </table>
+      <simple-id uuid='{13D9F240-77EA-4534-9617-F6AC8124C46C}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.09coffc0ljxjso1b1bfgr1aakbn6].[yr:event_date:ok]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{C871996A-C6D9-4C21-9E44-9361D8949CBE}' />
+    </window>
+  </windows>
+</workbook>

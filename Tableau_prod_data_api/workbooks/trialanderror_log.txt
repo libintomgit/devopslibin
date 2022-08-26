@@ -1,0 +1,57 @@
+#######TRY NO 1######
+/Users/libintom/Desktop/Tableau_prod_data_api/venv/bin/python "/Users/libintom/Desktop/Tableau_prod_data_api/workbooks/All time downloads/python/move_workbook_server.py"
+
+*Moving Workbook from https://prod-uk-a.online.tableau.com to https://tableau-staging03.corp.kwalee.com within same porject.
+
+1. Signing in to both sites to obtain authentication tokens
+
+2. Create projects in https://tableau-staging03.corp.kwalee.com  from https://prod-uk-a.online.tableau.com
+Fetching project details from https://prod-uk-a.online.tableau.com
+Creating projects in https://tableau-staging03.corp.kwalee.com
+
+3. Finding all workbooks id from 'https://prod-uk-a.online.tableau.com' and associated project name.
+
+4. Finding project id at https://tableau-staging03.corp.kwalee.com,associated with each workbook id a0868fca-c29d-460d-ade4-32c925834537 and Being Build
+Destination project ID f627dda3-713f-498e-9bd5-a644f335e184 for project name Being Build
+
+5. Downloading the workbook for a0868fca-c29d-460d-ade4-32c925834537
+	Downloading workbook to a temp file
+Downloaded the workbook ID: a0868fca-c29d-460d-ade4-32c925834537, Name: Dev Mark Olly Test, Project Name: Being Build
+
+6. Publishing workbook to https://tableau-staging03.corp.kwalee.com
+	Publishing 'Dev Mark Olly Test' using the all-in-one method (workbook under 64MB)
+	Uploading...
+Traceback (most recent call last):
+  File "/Users/libintom/Desktop/Tableau_prod_data_api/workbooks/All time downloads/python/move_workbook_server.py", line 597, in <module>
+    main()
+  File "/Users/libintom/Desktop/Tableau_prod_data_api/workbooks/All time downloads/python/move_workbook_server.py", line 565, in main
+    publish_response_views = publish_workbook(dest_server, dest_auth_token, dest_site_id, workbook_filename, dest_project_id)
+  File "/Users/libintom/Desktop/Tableau_prod_data_api/workbooks/All time downloads/python/move_workbook_server.py", line 348, in publish_workbook
+    _check_status(server_response, 201)
+  File "/Users/libintom/Desktop/Tableau_prod_data_api/workbooks/All time downloads/python/move_workbook_server.py", line 116, in _check_status
+    raise ApiCallError(error_message)
+__main__.ApiCallError: 403132: Forbidden - Dev Mark Olly Test failed to establish a connection to your datasource.
+
+Process finished with exit code 1
+
+#######TRY NO 2######
+5. Downloading the workbook for bf50962e-dec6-4432-9a81-42df998d55b9:	Downloading workbook to a temp file
+Downloaded the workbook ID: bf50962e-dec6-4432-9a81-42df998d55b9, Name: KPIs Trends MG, Project Name: Samples
+
+6. Publishing workbook to https://tableau-staging03.corp.kwalee.com
+	Publishing 'KPIs Trends MG' in 5.12MB chunks (workbook over 64MB):
+Traceback (most recent call last):
+  File "/Users/libintom/Desktop/Tableau_prod_data_api/workbooks/All time downloads/python/move_workbook_server.py", line 602, in <module>
+    main()
+  File "/Users/libintom/Desktop/Tableau_prod_data_api/workbooks/All time downloads/python/move_workbook_server.py", line 570, in main
+    publish_response_views = publish_workbook(dest_server, dest_auth_token, dest_site_id, workbook_filename, dest_project_id)
+  File "/Users/libintom/Desktop/Tableau_prod_data_api/workbooks/All time downloads/python/move_workbook_server.py", line 306, in publish_workbook
+    upload_id = start_upload_session(server, site_id, auth_token)
+  File "/Users/libintom/Desktop/Tableau_prod_data_api/workbooks/All time downloads/python/move_workbook_server.py", line 182, in start_upload_session
+    _check_status(server_response, 201)
+  File "/Users/libintom/Desktop/Tableau_prod_data_api/workbooks/All time downloads/python/move_workbook_server.py", line 116, in _check_status
+    raise ApiCallError(error_message)
+__main__.ApiCallError: 401002: Unauthorized Access - Invalid authentication credentials were provided.
+
+
+
