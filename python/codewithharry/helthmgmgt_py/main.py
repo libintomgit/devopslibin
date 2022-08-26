@@ -1,3 +1,4 @@
+#EZY HEALTH DATA MANAGEMENT SYSTEM
 import os.path
 import os
 import time
@@ -26,17 +27,14 @@ def get_date():
 # registering new user to the database
 def register_new_user():
     """registering new user to the database"""
-    # name_input = input("Enter your Name: ")
-    # username = name_input.lower()
-    if check_user_registered(username) == username:
-        print(f"\nHello {username.title()}, you are already a registered user."
-              f"\nYou can chose the other options to check or log your health information.\n")
-    else:
-        with open('./db/user_data', 'a') as f:
-            f.write(f"{username.lower()}\n")
-            print(f"New user \"{username.title()}\" has been registered Successfully.\n")
-        menu_list()
-        return username
+    make_db_dir()
+    # if check_user_registered(username) == username:
+    #     print(f"{username.title()} is already a registed user")
+    with open('./db/user_data', 'a') as f:
+        f.write(f"{username.lower()}\n")
+        print(f"New user \"{username.title()}\" has been registered Successfully.\n")
+    menu_list()
+    return username
 # Make db directory
 def make_db_dir():
    """Make db directory"""
@@ -47,22 +45,31 @@ def make_db_dir():
 # Check if the user is registered
 def check_user_registered(username):
     """returns the users name if its registered in the system file, else run register new user function"""
-    # user_name_input = input("Enter your name: ")
-    make_db_dir()
     if os.path.exists('./db/user_data') is True:
         with open("./db/user_data") as f:
             user_meta = f.readlines()
-        # print(user_name[1])
-        for names in user_meta:
-            if username.lower() in names:
-                return username.lower()
+            for names in user_meta:
+                if username in names:
+                    return username.lower()
+                    print(f"This user {username.title()} is already registered.\n")
+                else:
+                    print("This user is not registered,", user_reg_yn)
+                    user_input = input()
+                    if user_input.lower() != "y":
+                        exit(0)
+                    else:
+                        register_new_user()
     else:
-        print("This user is not registered,", user_reg_yn)
-        user_input = input()
-        if user_input.lower() != "y":
-            exit(0)
-        else:
-            register_new_user()
+        register_new_user()
+    # if username_valid == username:
+    #     # with open("./db/user_data") as f:
+    #     #     user_meta = f.readlines()
+    #     #     for names in user_meta:
+    #     #         if username in names:
+
+
+    # else:
+
 # Log ID generation
 def log_id_func():
     """Unique log id for the future use of string matching"""
@@ -187,14 +194,9 @@ def menu_list():
                 break
             elif choice_input == 1:
                 retrieve_user_diet_workout()
-                # print("show_user_data")
-                # show_user_data()
                 break
             elif choice_input == 2:
-                # print("register_new_user)
-                register_new_user()
-                # print("\nEnter the desired options to continue\n")
-                # print(menu1)
+                check_user_registered(username)
                 continue
             elif choice_input == 3:
                 print("Checking out. Please wait for a moment.\n")

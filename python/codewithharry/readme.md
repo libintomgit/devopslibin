@@ -140,7 +140,12 @@
 15. Scope | Global variable | Global keyword
     * Global variable is a variable used by all the functions which is written out of the function
     * Local variable is only available within the function
-    * global keyword is used to access/change the global variable value
+    * global keyword is used within the function to access/change the global variable value
+        var_name = 
+        def some_func():
+            global var_name
+            var_name = "Something"
+    * This will change the var value globally from within the function
     * Under nested function GLOBAL keyword will not access the value of any variable in the nested function but it just access the global
       variable outside all the function
 16. Recrussive | Iterative
@@ -214,4 +219,355 @@
      print(f"the time took to process this code is {time.time() - initial_time2} seconds")
     * and to check the average time run the code many times (example 1000) record the each runtime and divide it with 1000
     * https://www.geeksforgeeks.org/python-time-module/
-    * 
+22. Virtual environment | Requirements.txt
+    * virtual environment is an isolated location where the global changes in the system dose not effects the packages in the virtual environment
+    * pip install virtualenv - will install python virtual environment
+    * virtualenv <directory_name> - will create a clone of the python inside the virtual environment directory mentioned in the command
+    * source bin/activate - will activate the virtual env in the terminal (this is for mac and linux)
+    * now what ever you install within the vir env stay within the same
+    * for new modules use pip install <module_name> and to remove pip uninstall <module_name>
+    * virtualenv --system-site-packages <user_virtual_env_name> - this command will create a virtual env with all the packages installed in the system
+    * Requirements.txt file will contain the package used in the code to run successfully
+    * requirements file will be shared along with the code rather than sharing the virtual env directory itself, so that anyone can create new vir env and install the required
+      packages for the code to run
+    * pip freeze > requirements.txt - command will create the requirement file with all the external module(package) names with exact version used in the code
+    * pip install -r requirements.txt - will automatically install all the packages required
+23. Enumarate
+    * is a function which iterates index and value of each element in the list
+      for index, item in enumerate(list_name):
+            if index % 2 is 0: (or any statement to filter based on the index)
+                print("whatever") 
+24. How IMPORT command works
+    * import some_module as sm - will bring the some_module to sk scope
+      * sys.path - is the paths where it searches for the modules and imports it
+        import sys
+        print(sys.path)
+      Example: ['', '/opt/homebrew/Cellar/python@3.9/3.9.13_1/Frameworks/Python.framework/Versions/3.9/lib/python39.zip',\
+      '/opt/homebrew/Cellar/python@3.9/3.9.13_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9',\
+      '/opt/homebrew/Cellar/python@3.9/3.9.13_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/lib-dynload',\
+      '/Users/libintom/Library/Python/3.9/lib/python/site-packages',\
+      '/opt/homebrew/lib/python3.9/site-packages']
+    * import file_name - will import the your code from the other file
+      import file2
+      print(file2.function_name_infile2())
+      0r
+      from file2 import function_name/var_name
+      print(function_name/var_name())
+    * but it is recommended not to import the functions or vars from the file rather import the whole file and use it where ever required with the file name (file2.something)
+25. if __name__='__main__':
+    * when python file1(main file) is imported into file2, when you run the file2 it will run all the code which is in the file1 and as result along with importing the functions
+      whatever other content is written in the file1 will also be executed
+      * if __name__='__main__': is used in the file1 (main file) to avoid this behaviour, so every other content apart from functions will be written under this
+      **FILE1 (MAIN FILE)**
+        def get_date():
+            """log the current date and time"""
+            import datetime
+            return datetime.datetime.now()
+        def make_db_dir():
+            """Make db directory"""
+            if os.path.exists('./db') is True:
+                pass
+            else:
+                os.mkdir('./db')
+        if __name__=='__main__':
+            print(get_date())
+            make_db_dir()
+       **FILE2**
+        import file1
+        print(file1.get_date())
+    * by doing this, the contents in the main will not exected when you call this file1 where ever you import
+    * print(__name__) returns __main__ - this means, the __name__ s value will be __main__ only when you run the program in which this had added
+    * but when this is imported to other program and executed, the __name__s value will be file1
+26. Join Function
+    * var_name = " and ".join(list_name)
+    * so in the place of " and " use any charachter to join the list
+27. Map, Filter and Reduce
+    * MAP is used to typecast/run function on the data type in a list
+      * convert the below strings in the list to integer 
+      **method without map** 
+        var_name = ["1", "2", "3", "4", "5"]
+        for i in range(len(var_name)):
+            var_name[i] = int(var_name[i])
+      **using map**
+        var_name = ["1", "2", "3", "4", "5"]
+        var_name = list(map(int,var_name))
+        output
+        [1,2,3,4,5]
+        * convert the below integer to square root
+        **map with function
+          def sqr_rt(x):
+              return x*x
+          var_name = [1,2,3,4,5]
+          square_root = list(map(sqr_rt, var_name))
+        **map with lambda 
+          var_name = [1,2,3,4,5]
+          square_root = list(map(lambda x: x*x, var_name))
+          output
+          [1, 4, 9, 16, 25]
+        ** running functions from a list
+          def square_rt(x):
+              return x*x
+        
+          def qube_rt(x):
+              return x*x*x
+          func = [square_rt, qube_rt]
+          for i in range(5):
+              val = list(map(lambda x: x(i), func))
+        
+          result
+          [0, 0]
+          [1, 1]
+          [4, 8]
+          [9, 27]
+          [16, 64]
+    * FILTER function takes the function and iterable and returns the filtered value
+      var_list1 = [1,2,3,4,5,6,7,8,9]
+      
+      def is_greater_5(num):
+            return num>5
+      
+      greater_than_5 = list(filter(greater_than_5, var_list1))
+      print(val)
+      results in printing the list with all the numbers greater than 5 [6,7,8,9]
+    * REDUCE is a part of functool module (form functools import reduce)
+      list1 = [1,2,3,4,5,6]
+      num = reduce(lambda x, y: x+y, list1)
+      print num (result will ve 1+2+3+4+5+6 = 21)
+
+28. Decorators 
+    * is something that modifies the functionality of the functions
+    * we can call functions within function and can return function in the function
+      def dec1(func1):
+         def now_exec():
+            print("Executing now")
+            func1()
+            print("Executed")
+      
+      def who_is_harry():
+         print("Harry is a man")
+      
+      who_is_harry = dec1(who_is_harry)
+      who_is_harry()
+      
+      RESULT
+      Executing now
+      Harry is a man
+      Executed
+    * and in python this line who_is_harry = dec1(who_is_harry) can be written in short form using @
+      @dec1
+      def who_is_harry():
+         print("Harry is a man")
+      
+      ----------------------------Another example-------------------------------
+      def current_date_string(func1):
+          def string1():
+               print("The date and time now is", end=": ")
+               print(func1(), end=". ")
+               print("Thanks")
+          return string1
+
+      @current_date_string
+      def get_date():
+         """log the current date and time"""
+         import datetime
+         return datetime.datetime.now
+
+       get_date()
+       RESULT
+       The date and time now is: 2022-07-31 17:07:09.104533. Thanks
+29. Object Oriented Programing
+    * Classes is a template
+    * Object is an instance of a class
+    * example leave letter (leave letter template is class and one instance of letter using that template is object)
+    * OOP is used on DRY concept - Donot Repeat Yourself
+     class students()
+          pass
+    
+     libin = student()
+     tom = student()
+     libin.name = "Libin Tom"
+     libin.age = 31
+     tom.name = "Tom Tom"
+     tom.age = 55
+
+     print(libin.name, tom.name)
+    * it's a good practice to start any class name with the Title case
+    * classs arrtibutes can be changed using class name only not using the object
+    * self - is self, when ever it is used on the instance that instance will be self
+      class Employee():
+            no_of_leaves_month = 4
+            def print_details(self):
+                return f"Employeed name is {self.name}, Salary {self.salary} and rele {self.role}"
+      
+      libin = Employee()
+      tom = Employee()
+      
+      libin.name = "Libin Tom"
+      libin.salary = 70000
+      libin.role = "Devops"
+      tom.name = "Tom Tom"
+      tom.salary = 70000
+      tom.role = "Devloper"
+      print(libin.print_details())
+      Employeed name is Libin Tom, Salary 70000 and rele Devops
+      print(tom.print_details())
+      Employeed name is Tom Tom, Salary 70000 and rele Devloper
+    * self and __init__ CONSTRUCTOR - constructes the attributes
+      class Employee:
+            no_of_leave_month = 4
+            def __init__(self, vname, vsalary, vrole):
+                self.name = vname
+                self.salary = vsalary
+                self.role = vrole
+        
+            def print_employee_details(self):
+                return f"Employee name is {self.name}, Salary {self.salary} and rele {self.role} - Number of monthly leaves {Emp"
+        
+        libin = Employee("Libin Tom", 75000, "Junior Devops")
+        Tibin = Employee("Tibin George", 200000, "Senior Devops")
+        Neethu = Employee("Neethu Jose", 150000, "Project Manager")
+        
+        try:
+            print(Tom.print_employee_details())
+        except NameError as e:
+            print("This employee is not in the database. Please check the spelling and search again.")
+        
+    * Class methods  - can only access the instance variables of that class, can be accessed through any instance or class
+    * but this will change only the class attributes values not the instance
+        class Employee:
+            no_of_leave_month = 10
+            def __init__(self, vname, vsalary, vrole):
+                self.name = vname
+                self.salary = vsalary
+                self.role = vrole
+        
+            def print_employee_details(self):
+                return f"Employee name is {self.name}, Salary {self.salary} and role {self.role} - Number of monthly leaves {Employee.no_of_leave_month}"
+        
+            @classmethod
+            def change_leaves(cls, newleaves):
+                cls.no_of_leave_month = newleaves
+        
+        libin = Employee("Libin Tom", 75000, "Junior Devops")
+        Tibin = Employee("Tibin George", 200000, "Senior Devops")
+        Neethu = Employee("Neethu Jose", 150000, "Project Manager")
+        
+        try:
+            print(Tibin.print_employee_details())
+            libin.change_leaves(4)
+            print(Tibin.print_employee_details())
+            print(Employee.no_of_leave_month)
+        
+        except NameError as e:
+            print("This employee is not in the database. Please check the spelling and search again.")
+        
+        Response:
+        Employee name is Tibin George, Salary 200000 and role Senior Devops - Number of monthly leaves 10
+        Employee name is Tibin George, Salary 200000 and role Senior Devops - Number of monthly leaves 4
+        4
+    * Class methods as Alternative constructor this can be used to update the existing constructor
+         class Employee:
+            no_of_leave_month = 10
+            def __init__(self, vname, vsalary, vrole):
+                self.name = vname
+                self.salary = vsalary
+                self.role = vrole
+        
+            def print_employee_details(self):
+                return f"Employee name is {self.name}, Salary {self.salary} and role {self.role} - Number of monthly leaves {Employee.no_of_leave_month}"
+        
+            @classmethod
+            def change_leaves(cls, newleaves):
+                cls.no_of_leave_month = newleaves
+        
+            @classmethod
+            def from_string(cls, string):
+                # param = string.split("-")
+                # return cls(param[0],param[1],param[2]) # actually whats happening
+                return cls(*string.split("-")) #one liner code
+        
+        
+        libin = Employee("Libin Tom", 75000, "Junior Devops")
+        Tibin = Employee("Tibin George", 200000, "Senior Devops")
+        Neethu = Employee("Neethu Jose", 150000, "Project Manager")
+        Jijo = Employee.from_string("Jijo Joseph-150000-General Manager")
+        
+        try:
+            print(Jijo.print_employee_details())
+            # print(Tibin.print_employee_details())
+            # libin.change_leaves(4)
+            # print(Tibin.print_employee_details())
+            # print(Employee.no_of_leave_month)
+            # print(Jijo.print_employee_details())
+        
+        except NameError as e:
+            print("This employee is not in the data
+        Response
+        Employee name is Jijo Joseph, Salary 150000 and role General Manager - Number of monthly leaves 10
+
+    * Static Method @staticmethod
+        * is used to call any string " def func_name(string): "
+        * functions are used within the classes when the function is only used on the instance of the calss method
+        * for example libin = class_name() is an instance of the class and using func_name() will work only for libin instance.
+          
+          @stringmethod
+          def print_string(string):
+              print(f"{string} is a good thing")
+
+          print(Employee.print_string("book"))
+          print(libin.print_string("book"))
+    * Abstraction & Encapsulation
+        * Abstraction is fragments of works (mouse or keyboard or monitor is a layer of abstraction in a computer)
+        * to achive abstraction we have to do encapsulation
+        * encapsulation means hiding the implementation. insde a capsule
+        * which means when a program spesific to a iteam (like players in games) within the class like above its called abstraction and encapsulation
+          becasue this class can be called anytime anywhere and variables specific to the class will stay in that
+    * Single Inheritence
+        * inheriting the functions of other class
+        * class class_name(existing_class_name):
+    * Multiple Inheritence
+        * inheriting multiple class in one cass
+        * class class_name(existing_class_name1, existing_class_name1):
+        * here the first inheritance will have higer priority
+        * hence common instance in the both the inherited calsses first one will be used
+    * Multilevel Inheritence
+        * is inheriting the class in one another
+            class Dad:
+                pass
+            class Son(Dad):
+                pass
+            class Grandson(Son):
+                pass
+        * harry = Grandson()
+            will check in itself and the son and then dad.
+            
+    * Public, Protected and private access specifiers
+        * are used to protect the variables
+        * _ is used to protect and can be used by the child classess
+          _var_name = "value"
+        * __ is used to private it cannot be used outside
+          __var_name = "value"
+        * else to should use name angling
+          class_inst = Class_name():
+          print(class_inst._Class_name__var_name)
+    * Polymorphism 
+        * Means ability to take various forms
+        * this changes the default behaviour of the object by overwriting
+    * Super() and overriding
+        * when the class is inherited in the subclass and if objects/methods are over written in the subclass the super class will not be executed
+        * super is used to access the super class methods when the methods are overridden in the sub class
+          Class A:
+            var_name = "some string in calss A"
+            def __init__(self):
+                self.var1 = "I am inside class A"
+                self.classvar1 = "I am in A"
+                self.special = "Special string"
+          Class B(A):
+            var_name = "some string in class B with same var_name as class A"
+            def __init__(self):
+                self.var1 = "I am inside class A"
+                super().__init__()
+                print(super().classvar1)
+          a = A()
+          b = B()
+          print(b.special, b.var1, 
