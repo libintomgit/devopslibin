@@ -412,16 +412,16 @@
       Employeed name is Libin Tom, Salary 70000 and rele Devops
       print(tom.print_details())
       Employeed name is Tom Tom, Salary 70000 and rele Devloper
-    * self and __init__ CONSTRUCTOR - constructes the attributes
+  29.1. self and __init__ CONSTRUCTOR - constructes the attributes
       class Employee:
-            no_of_leave_month = 4
-            def __init__(self, vname, vsalary, vrole):
-                self.name = vname
-                self.salary = vsalary
-                self.role = vrole
+          no_of_leave_month = 4
+          def __init__(self, vname, vsalary, vrole):
+            self.name = vname
+            self.salary = vsalary
+            self.role = vrole
         
-            def print_employee_details(self):
-                return f"Employee name is {self.name}, Salary {self.salary} and rele {self.role} - Number of monthly leaves {Emp"
+          def print_employee_details(self):
+            return f"Employee name is {self.name}, Salary {self.salary} and rele {self.role} - Number of monthly leaves {Emp"
         
         libin = Employee("Libin Tom", 75000, "Junior Devops")
         Tibin = Employee("Tibin George", 200000, "Senior Devops")
@@ -432,8 +432,8 @@
         except NameError as e:
             print("This employee is not in the database. Please check the spelling and search again.")
         
-    * Class methods  - can only access the instance variables of that class, can be accessed through any instance or class
-    * but this will change only the class attributes values not the instance
+  29.2. @classmethod (Class methods) - can only access the instance variables of that class, can be accessed through any instance or class
+      * but this will change only the class attributes values not the instance
         class Employee:
             no_of_leave_month = 10
             def __init__(self, vname, vsalary, vrole):
@@ -465,47 +465,48 @@
         Employee name is Tibin George, Salary 200000 and role Senior Devops - Number of monthly leaves 10
         Employee name is Tibin George, Salary 200000 and role Senior Devops - Number of monthly leaves 4
         4
-    * Class methods as Alternative constructor this can be used to update the existing constructor
-         class Employee:
-            no_of_leave_month = 10
-            def __init__(self, vname, vsalary, vrole):
-                self.name = vname
-                self.salary = vsalary
-                self.role = vrole
-        
-            def print_employee_details(self):
-                return f"Employee name is {self.name}, Salary {self.salary} and role {self.role} - Number of monthly leaves {Employee.no_of_leave_month}"
-        
-            @classmethod
-            def change_leaves(cls, newleaves):
-                cls.no_of_leave_month = newleaves
-        
-            @classmethod
-            def from_string(cls, string):
-                # param = string.split("-")
-                # return cls(param[0],param[1],param[2]) # actually whats happening
-                return cls(*string.split("-")) #one liner code
-        
-        
-        libin = Employee("Libin Tom", 75000, "Junior Devops")
-        Tibin = Employee("Tibin George", 200000, "Senior Devops")
-        Neethu = Employee("Neethu Jose", 150000, "Project Manager")
-        Jijo = Employee.from_string("Jijo Joseph-150000-General Manager")
-        
-        try:
-            print(Jijo.print_employee_details())
-            # print(Tibin.print_employee_details())
-            # libin.change_leaves(4)
-            # print(Tibin.print_employee_details())
-            # print(Employee.no_of_leave_month)
-            # print(Jijo.print_employee_details())
-        
-        except NameError as e:
-            print("This employee is not in the data
-        Response
-        Employee name is Jijo Joseph, Salary 150000 and role General Manager - Number of monthly leaves 10
+      
+        * @classmethods as Alternative constructor this can be used to update the existing constructor
+          class Employee:
+              no_of_leave_month = 10
+              def __init__(self, vname, vsalary, vrole):
+                  self.name = vname
+                  self.salary = vsalary
+                  self.role = vrole
+          
+              def print_employee_details(self):
+                  return f"Employee name is {self.name}, Salary {self.salary} and role {self.role} - Number of monthly leaves {Employee.no_of_leave_month}"
+          
+              @classmethod
+              def change_leaves(cls, newleaves):
+                  cls.no_of_leave_month = newleaves
+          
+              @classmethod
+              def from_string(cls, string):
+                  # param = string.split("-")
+                  # return cls(param[0],param[1],param[2]) # actually whats happening
+                  return cls(*string.split("-")) #one liner code
+          
+          
+          libin = Employee("Libin Tom", 75000, "Junior Devops")
+          Tibin = Employee("Tibin George", 200000, "Senior Devops")
+          Neethu = Employee("Neethu Jose", 150000, "Project Manager")
+          Jijo = Employee.from_string("Jijo Joseph-150000-General Manager")
+          
+          try:
+              print(Jijo.print_employee_details())
+              # print(Tibin.print_employee_details())
+              # libin.change_leaves(4)
+              # print(Tibin.print_employee_details())
+              # print(Employee.no_of_leave_month)
+              # print(Jijo.print_employee_details())
+          
+          except NameError as e:
+              print("This employee is not in the data
+          Response
+          Employee name is Jijo Joseph, Salary 150000 and role General Manager - Number of monthly leaves 10
 
-    * Static Method @staticmethod
+  29.3. Static Method @staticmethod
         * is used to call any string " def func_name(string): "
         * functions are used within the classes when the function is only used on the instance of the calss method
         * for example libin = class_name() is an instance of the class and using func_name() will work only for libin instance.
@@ -516,21 +517,25 @@
 
           print(Employee.print_string("book"))
           print(libin.print_string("book"))
-    * Abstraction & Encapsulation
+  
+  29.4. Abstraction & Encapsulation
         * Abstraction is fragments of works (mouse or keyboard or monitor is a layer of abstraction in a computer)
         * to achive abstraction we have to do encapsulation
         * encapsulation means hiding the implementation. insde a capsule
         * which means when a program spesific to a iteam (like players in games) within the class like above its called abstraction and encapsulation
           becasue this class can be called anytime anywhere and variables specific to the class will stay in that
-    * Single Inheritence
+  
+  29.5. Single Inheritence
         * inheriting the functions of other class
         * class class_name(existing_class_name):
-    * Multiple Inheritence
+  
+  29.6. Multiple Inheritence
         * inheriting multiple class in one cass
         * class class_name(existing_class_name1, existing_class_name1):
         * here the first inheritance will have higer priority
         * hence common instance in the both the inherited calsses first one will be used
-    * Multilevel Inheritence
+  
+  29.7. Multilevel Inheritence
         * is inheriting the class in one another
             class Dad:
                 pass
@@ -541,7 +546,7 @@
         * harry = Grandson()
             will check in itself and the son and then dad.
             
-    * Public, Protected and private access specifiers
+  29.8. Public, Protected and private access specifiers
         * are used to protect the variables
         * _ is used to protect and can be used by the child classess
           _var_name = "value"
@@ -550,10 +555,12 @@
         * else to should use name angling
           class_inst = Class_name():
           print(class_inst._Class_name__var_name)
-    * Polymorphism 
+  
+  29.9. Polymorphism 
         * Means ability to take various forms
         * this changes the default behaviour of the object by overwriting
-    * Super() and overriding
+  
+  29.10. Super() and overriding
         * when the class is inherited in the subclass and if objects/methods are over written in the subclass the super class will not be executed
         * super is used to access the super class methods when the methods are overridden in the sub class
           Class A:
@@ -571,3 +578,63 @@
           a = A()
           b = B()
           print(b.special, b.var1, 
+  29.11. Dimond shape problem in multiple inheritance
+        * more than a problem multiple inheritance is a confusion. when you inherit from multiple classes programer will get confused as if from where it is running in an instance
+        * so it is always good to avoid multiple inheritance
+  29.12. Operator overloading and dendor method
+         class Employee:
+          no_of_leave = 4
+          
+          def __init__(self, vname, vsalary, vrole):
+            self.name = vname
+            self.salary = vsalary
+            self.role = vrole
+        
+          def print_employee_details(self):
+            return f"Employee name is {self.name}, Salary {self.salary} and rele {self.role}"
+
+        * any method starts with dunderscore __methodname__ they are special methods because they are constructor
+        * Operator overloading -
+          emp1 = Employee("libin", 3000, "Python Devops")
+          emp2 = Employee("Tom", 2000, "Datacenter")
+          
+          * when you add any 2 objects like emp1 + emp2, an __add__ dunderscore method will run in the background
+
+          def __add__(self, other):
+            return self.salary + other.salary
+
+          print(emp1 + emp2)
+
+          Output:
+          5000
+          * this means that special __add__ method took the first argument object emp1 salary as self and second argument as other emp2 objests salary and added it
+
+          * and this is helping us in operatory overloading
+          * likewise there are many methods.. check the list in the internet https://docs.python.org/3/library/operator.html
+          http://davis.lbl.gov/Manuals/PYTHON-2.4.3/lib/operator-map.html
+
+          * __repr__(self):
+              return self.print_employee_details
+              or
+              return f"Employee name is {self.name}, Salary {self.salary}, Role {self.role}
+          
+          print(emp1)
+          Employee name is Libin, Salary 3000 and rele Python Devops
+
+          * difference between __repr__(self) and __str__(self)
+          __repr__(self) - Creates a full string representation of an object
+          __str__(self) - Creates an informal string representation
+
+          * str is the default selection when if both str and repr is used unless its specified like below
+            print(rerp(emp1))
+            pritn(str(emp1))
+
+          * so this how we overrige the function and is called operator overloading
+
+      
+
+
+
+
+
+        
