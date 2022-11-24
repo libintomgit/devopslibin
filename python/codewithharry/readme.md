@@ -630,7 +630,85 @@
             pritn(str(emp1))
 
           * so this how we overrige the function and is called operator overloading
+  
+  29.13. Operator overloading and dendor method
+        * Abstract base class and @abstractmethod
+        * ABC - Abstract base clas is a module in python
+          from abc import ABC
+        * so if we inherit any calss with ABC metaclass, which will mandates to implement some methods in the child class
+          
+          class Shape(ABC):
+              @abstractmethod
+              def printarea(self):
+                  return 0
 
+          class Rectangle(Shape):
+              def __init__(self):
+                  self.length = 6
+                  self.breadth = 7
+                
+              def printarea(self):
+                  return self.lenght * self.breadth
+          
+          This way it mandates to write methods in the chiled class and in the above example if printarea method not defined, it will throgh an error when you create a object with the child class
+          NOTE: That we cannot create object of the abstract class 
+          
+  29.13. Setters and Property Decorators
+        * When object is created and only then will initialise the constructor but when you update the object it will not run the whole constructor angain for problems like below will uccor
+
+        class Employee:
+            def __init__(self, fname, lname):
+                self.fname = fname
+                self.lname = lname
+                self.email = f"{fname}.{lname}@somedomain.com"
+
+        objec1 = Employees("libin", "Tom")
+        now it initialises the constructor with firstname libin second name tom and email as libin.tom@somedomain.com
+
+        object1.Employee.fname = "Tibin"
+        we expect it to change the email but unfortunately it change only the fname becasue the constructor runns only while creating the object
+
+        solution:1
+        rather entering email in the constructor, create a method called email and use the decorator @property above the method
+
+        @property
+        def email(self):
+            if self.fname == None or self.lname == None:
+              return "Email is not added. Please set it using setter"
+            return f"{fname}.{lname}@somedomain.com"
+
+        @setter - is used to change the fname and lname using the user input of email
+
+        @email.setter
+        def email(self, string):
+            print("Setting now....")
+            names = string.split("@")[0]
+            fname = name.split(".")[0]
+            lname = name.split(".")[1]
+
+
+        @email.deleter
+        def email(self):
+            self.fname = None
+            self.lname = None
+
+        del object1.email
+        will return
+        None.None@somedomanin.come
+
+        to fix that add condition in the email setter
+  
+  29.13. Object inrospection
+      * Means knowing about the object which class, type, how it is storing, etc
+      * type print(type(objectname)) - will show the type of the object (example string )
+      * id print(id(objectname)) - will show the id of the object
+      * dir print(dir(objectname)) - will print all the methods available in the object
+
+      
+
+
+
+        
       
 
 
