@@ -1,0 +1,144 @@
+---
+- hosts: all
+  gather_facts: False
+  remote_user: ubuntu
+  # become: false
+  # plugin: aws_ec2
+  # keyed_groups:
+  #   - key: tags
+  #     prefix: tag
+  # var_files:
+  #   # - some-filename.yml
+  vars:
+    - script_source: "/var/lib/jenkins/workspace/ansible-jenkins-freestyle/ansible-playbooks/setup_scripts"
+    - app_repo: "git@github.com:libintomgit/msdevopsproj.git"
+    - repo_dest: "~/myapplication/"
+    - sshkey_source: "/var/lib/jenkins/workspace/jenkins-terraform-webhook/id_rsa_ansible"
+    - sshkey_target: "~/myapplication/id_rsa_ansible.pem"
+    - logs_target_dir: "{{repo_dest}}/logs"
+
+  tasks:
+
+    - name: Print Message
+      debug:
+        msg: Creating Django Application Environment
+      
+    - name: Create Directory | Application Repo
+      file:
+        path: "{{repo_dest}}"
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: 0700
+
+    - name: Copy Git access key | Target Server's "{{repo_dest}}" directory
+      copy:
+        src: "{{sshkey_source}}"
+        dest: "{{sshkey_target}}"
+        owner: ubuntu
+        group: ubuntu
+        mode: 0400
+
+    - name: List Files | In {{repo_dest}}
+      shell: "ls -l {{repo_dest}}"
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines
+
+    - name: Git checkout | Application Repo
+      ansible.builtin.git:
+        repo: "{{app_repo}}"
+        dest: "{{repo_dest}}"
+        key_file: /home/ubuntu/.ssh/id_rsa
+
+    - name: Setup Python Virtual ENV | django-venv
+      ansible.builtin.shell: python3 -m venv django-venv
+      args:
+        chdir: "{{repo_dest}}"
+
+    - name: Copy PIP Requirements | Jenkins to Target Server
+      copy:
+        src: "{{script_source}}/requirements.txt"
+        dest: "{{repo_dest}}/requirements.txt"
+        owner: ubuntu
+        group: ubuntu
+        mode: 0644
+
+    - name: Env django-venv | PIP | Install | Django & Gunicorn
+      pip:
+        requirements: "{{repo_dest}}/requirements.txt"
+        virtualenv: "{{repo_dest}}/django-venv"
+
+    - name: Logs | Create Logs Directory at "{{repo_dest}}"
+      file:
+        path: "{{logs_target_dir}}"
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: 0666
+
+    - name: Creating Empty Log files | Create files
+      file:
+        path: "{{logs_target_dir}}/{{item}}"
+        state: touch
+        owner: ubuntu
+        group: ubuntu
+        mode: 0666
+      with_items:
+        - error.log
+        - access.log
+
+    - name: List files in directory
+      shell: "ls -l {{logs_target_dir}}" 
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines
+
+
+    # - name: Check remote user
+    #   become: false
+    #   shell: whoami
+    #   register: command_output_remoteuser
+
+    # - debug:
+    #     var: command_output_remoteuser.stdout_lines
+
+    # - name: Setup Python Virtual ENV | Copy setup script
+    #   become: true
+    #   copy:
+    #     src: ./setup_scripts/envsetup.sh
+    #     # /var/lib/jenkins/workspace/ansible-jenkins-freestyle/ansible-playbooks
+    #     dest: /var/
+    #     owner: ubuntu
+    #     group: ubuntu
+    #     mode: 0744
+      
+    # - name: Setup Python Virtual ENV | Execute script
+    #   become: true
+
+    #   ansible.builtin.shell: /var/envsetup.sh
+    #   args:
+    #     chdir: /var/
+
+        # - name: FALSE | get the username running the deploy
+    #   become: false
+    #   local_action: command whoami
+    #   register: username_on_the_host
+
+    # - debug:
+    #     var: username_on_the_host.stdout_lines
+
+    # - name: TRUE | get the username running the deploy
+    #   become: true
+    #   local_action: command whoami
+    #   register: username_on_the_host
+
+    # - debug:
+    #     var: username_on_the_host.stdout_lines
+
+    # - name: WITHOUT BECOME | get the username running the deploy
+    #   local_action: command whoami
+    #   register: username_on_the_host
+
+    # - debug:
+    #     var: username_on_the_host.stdout_lines
