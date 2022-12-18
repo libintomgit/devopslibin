@@ -704,15 +704,361 @@
       * id print(id(objectname)) - will show the id of the object
       * dir print(dir(objectname)) - will print all the methods available in the object
 
+30. Generators
+      > Iterable
+        * __iter__() or __getitem__()
+        * Is getting to know if an item is iterable like callable one after one 1,2,3,4,
+      > Iterator
+        * __next__() 
+        * If an item is iterable then iterator will iterate
+      > Iteration
+        * Is the process of itrator iterating basically iteration of an item
+
+      * Normally while iterating in for loop it iterates the value and keeps in the memory but dose not stores.
+      * It keeps iterating an generating
+      * Like "range" is a generator 
+      ## Creating generator
+      def gen(n):
+          for i in range(n):
+              yield i
       
+      * YIELD - Is a generator and will generate on the fly 
+      * RETURN - Function will return with the return statment nothing else it will do after that
+      * PRINT - Will print it in the console
 
+      Generator is used to save the main memory in the system.
+      Ex. if you want to pull hundrades and thousands of data from a database but if the values you will use it only one at a time lormal looing way will keep all the data in the main memory. Rather incase of generator (yield), it will only donwload the generate the one value and when __next__() is called it will generate the next data.
 
+# 31. Comprehensions
+  ## List cmoprehension
+  * Writing list looping shorter
+  General way:
 
-        
-      
+  ```sh
+  ls = []
+  for i in range(100):
+      if i%3 == 0:
+          ls.appened(i)
+  ```
 
+  * List Comprehension
+  ls = [i for i in range(100) if i%3 == 0]
 
+  ## Dictionary cmoprehension
+  dict = {i:f"items{i}" for i in range(100) if i%100==0}
+  
+  * reverse dictionary
 
+  dict = {value:key for key,value in dict.items()}
 
+  ## Set cmoprehension
+  * Set will have on duplicats and will be in {} bracket unlike dictionary set is not a key value pair
+  set = {dress for dress in ["dress1", "dress2", "dress3", "dress1"]}
 
-        
+  ## Generator cmoprehension
+  * Generator is such function in which we can yield, i.e, it is capable of generating but dose not gererate until we ask it to generate and we can gerate value on the fly and it will give the next value
+
+  evens = (i for i in range(100) if i%2==0)
+
+# 32. For with Else
+  * For loop ends in 2 ways, Normal end of the index or break statement
+  * Else works only when for loop ends normally
+
+  ## When to use else in for loop
+  for i in items:
+    if i == <something_not_in_the_list>
+      break
+  else:
+    print(f"Item {i} is not available")
+
+  Result: will be else print statement becasue i == something not in the list
+  but if i == some thing in the list then the obious the loop will break
+
+# 33. Function Caching
+  * Will cache/store the function result so that function dosenot require to run everytime.
+  * It stores input and output value
+  * Import the function caching 
+  '''sh from functools import lru_cache ```
+
+  * lru_cache is a decorator
+  * use @lru_cache(maxsize=n) above the funtion
+  * maxsize will store the last n times funtion called
+
+# 34. Else & Finally in Try Except
+  ## Finally
+  * Finally is used after exception to execute code after finally either it executes try or exception, i.e, in any case finally should run
+  * Finally is usually used for the code cleanup
+  * 
+  try:
+    f = open("file_name.txt")
+  except Exeption as e:
+    print(e)
+  finally:
+    print("This code must run")
+
+  ## Else
+  * Else will not run if except executes but if try executes else will execute
+  * That is either except or else one of them will run, so if except runs else will not and if except dose not then else will
+  try:
+    f = open("file_name.txt")
+  except Exeption as e:
+    print(e)
+  else:
+    print("Else runs if except did not run")
+  finally:
+    print("Finally will run always")
+
+# 35. Coroutines In Python
+  * Is used in such cases when a function takes time to initialise, may be fetching data or any time consumig action.
+  * And once the intialisation is completed the same data can be used again and again
+  * So in the above case coroutine is used to stre the value and run the further code in the function to process the initialised data
+  * It is kind of generator functionality. In the yield in funtion we stored the whole value of the loop and use them by next
+  * In this scenario we will use the yield to sotre the value in between the function and then use the same value to execute the futher code
+  ```sh
+  def searcher():
+      import time
+      # lets assume below is the task which consumes around 4 seconds
+      book = "This is the contents of the book which the code took to download and read and it takes 4 secods for this example"
+      time.sleep(4)
+
+      #Below run the coroutines with infinite wile loop to store the data and do search on the above fetched time consuming data
+
+      while True:
+        text = (yield) # this is the yield of the above book
+        if text in book:
+            print("your text is in the book")
+        else:
+            print("your text is not in the book")
+    
+    search = searcher()
+    print("Search strated")
+    next(search)
+    print("Now run the query")
+
+    search.send("download")
+  ```
+
+# 36. OS Module
+  * Used to interact with the system OS
+
+  ```sh
+  print(os.getcwd())
+  os.chdir("~/")
+  os.listdir()
+  os.listdir('/path_of_dir/')
+  os.mkdir("dir_name")
+  os.makedirs("with/trailing/path")
+  os.rename("filename", "new_filename")
+  os.environ.get('HOME') or Path
+  os.path.join("/dir_a/", "dir_b") > /dir_a/dir_b
+  os.path.exists("/dir_path/") > boolean
+  os.path.isfile("/dir_path/") > false
+  os.path.isdir("/dir_path") > true
+
+  ```
+# 37. Requests module
+  * Is used to interact with http requests
+  * About requests in pypi https://pypi.org/project/requests/
+
+# 38. Json Modules
+  * 
+
+  ## 
+  * json.loads will parse the data and will create a json dictionary
+  ```sh
+  import json
+  data = '{"var1":"libin", "var2":"tom"}'
+
+  parsed = json.loads(data)
+  print(parsed['var1'])
+  ## above data is a string not dictionary and using the json.loads will parse the data to convert it to json
+
+  json.load #find the differance
+  
+  data2 = {
+    "channel_name": "codewithharry",
+    "cars": ['bmw', "audi a8", "ferrari"],
+    "fridge": ('roti',540),
+    "allowed": True
+  }
+
+  l = json.dumps(data2) #json.dumps will convert the data to work javascrip data so that this data works in the browser
+  
+  #output
+  {"channel_name": "codewithharry", "cars": ["bmw", "audi a8", "ferrari"], "fridge": ["roti", 540], "allowed": true}
+
+  l_sort = json.dumps(data2, sort_keys=True)
+
+  #Output
+  {"allowed": true, "cars": ["bmw", "audi a8", "ferrari"], "channel_name": "codewithharry", "fridge": ["roti", 540]}
+  ```
+
+# 39. Pickle module
+  * Is to pack the object for later use
+
+  ```sh
+  import pickle
+  cars = ["audi", "bmw", "maruthi", "fite"]
+  file = "file-name.pkl"
+  file_object = open(file, 'wb')
+  pickle.dump(cars, file_object)
+  file_object.close()
+
+  #In the above code created cars list object, then cretaed and opend a file in write binary mode, then pickle.dump cars object to that file.
+
+  file = "file-name.pkl"
+  file_object = open(file, 'rb')
+  cars = pickle.load(file_object)
+  print(cars)
+  
+  Output:
+  ["audi", "bmw", "maruthi", "fite"]
+  ```
+# 40. Regular expression
+  * Used to find a specific pattern of a string
+  > import re
+  * regular funtions in the re is
+  ```findall, search, split, sub, finditer```
+  * <strong>Findall</strong> : Return the string using the regex string pattern 
+  * <strong>Search</strong> : Search dose the same as findall but dose <strong>matchobject</strong>
+  * <strong>Split</strong> : 
+  * <strong>Sub</strong> : 
+  * <strong>Findall</strong> : 
+  > <strong>RAWSTRING</strong> : using rawstring r"" will remove the escape charachter and prints the charachters as is
+  ```sh print("Hello people \n in the world")
+      output:
+      Hello people
+      in the world
+
+      print(r"Hello people \n in the world")
+      output:
+      Hello people \n in the world
+  ```
+
+  ```sh
+  patt = re.compiler(r'\d{5}-\d{4}')
+  matches = patt.finditer(mystring)
+  for match in matches:
+      print(match)
+  ```
+  [List of Regular Expressions](https://sites.ualberta.ca/~kirchner/513/OpenOffice%20regular%20expression%20list.pdf)
+
+# 41. Converting .py to .exe
+  * Install the pyinstaller
+  ```sh pip install pyinstaller ```
+  * Conver the python file to exe
+  ```sh pyinstaller program_filename.py```
+  >This will now convert the program to exe file
+
+  * Make the same in one file
+  ```sh pyinstaller --onefile program_filename.py```
+
+# 42. Raise
+  * Is a built in keyword
+  * Is used to raise the exception to not run the code any futher untill the exception is rectified
+  * [Python exceptions list ](https://www.tutorialspoint.com/python/python_exceptions.htm#:~:text=What%20is%20Exception%3F,object%20that%20represents%20an%20error.)
+  ```sh
+  if int(b)==0:
+    raise ZeroFivisionError("b is 0 so stopping")
+  
+  -----
+  if a.isnumeric():
+    raise Exception("Numbers are not allowed")
+
+  c = input("Enter your name :")
+  try:
+    print(a)
+  except Exceptions as e:
+    if c == "some_specific_string":
+        raise ValueError("String is not allowed")
+    print("Exception handled")
+  ```
+
+# 43. Differance between is and ==
+  * == > Value equality > Two objects has same value
+  * is > reference equality > Two references refer to the same object
+  ```sh
+  a = [1,2,3]
+  b = a
+
+  a == b > True # A and B is has same value
+  a is b > True # A and B is fereing the same object
+
+  c = a[:] # C is now copy of A
+
+  a == c > True # A and C both has same value
+  a is c > False # A and C is not refering the same object
+  ```
+
+# 44. Python V 2.x and 3.x 
+  * [Watch Harry video for more details](https://www.youtube.com/watch?v=n39cxF9bQIE&list=PLu0W_9lII9agICnT8t4iYVSZ3eykIAOME&index=92)
+
+# 45. Command line argument
+  * Usin this we can parse argument after the script in the command line
+  
+  ```sh
+  import argparse
+  import sys
+
+  def calc(args):
+      if args.o=='add':
+          return args.x + args.y
+      elif args.o=='sub':
+          return args.x - args.y
+      elif args.o=='mul':
+          return args.x * args.y
+      elif args.o=='div':
+          return args.x / args.y
+      else:
+          print("Somethign worng. --help for mode details")
+
+  if __name__ == '__main__'
+      parser = argparse.ArgumentParser()
+      parser.add_argument('--x', type=float, default=1.0, help="Enter a number")
+      parser.add_argument('--y', type=float, default=1.0, help="Enter another number")
+      parser.add_argument('--o', type=str, default=1.0, help="Enter the operation [add, sub, mul, div]")
+
+      args = parser.parse_arg()
+      sys.stdout.write(str(clac(args)))
+  ```
+
+# 46. Creating python library/package
+  * Create prject directory
+  * Inside project directory, create another directory for the package, readme file, licence file and setup.py file
+  * Add the below code in setup.py
+  ```sh
+  from setuptools import setup
+  setup(name="package_name"),
+  version="1.0",
+  description="this is a short intro description",
+  long_description="this is a long detailed description",
+  author="Name_of_the_authour",
+  packages=["package_name"],
+  install_requires=["name_of_the_dependency_packages"]
+  )
+  ```
+  * Create a __init__.py file in the package directory and add your code
+  ```sh
+  class Someclass:
+      def __init__(self):
+          print("constructor created")
+      def somefuntion(arg):
+          print("This is my package)
+          return something
+  ```
+  * pip install wheel
+  ```sh python3 -m pip install wheel```
+  * Make the wheel of the new package using wheel
+  ```sh
+  # Change directory to the package root directory
+
+  python3 setup.py bdist_wheel
+  ```
+  > This will build the package and creates new directory
+  > Change director to dist
+  * Install package using the whl file
+  ```sh pip install package_name-1.0xxxx.whl```
+
+  * Import the new package in the python code
+  ```import package_name```
+  > Each time any new updates in the package, change the version and run the setup again

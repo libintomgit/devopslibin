@@ -228,7 +228,3 @@ def print_banner():
 # print(log_id_func.__doc__)
 print_banner()
 user_checkin()
-
-
-
-
