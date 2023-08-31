@@ -1062,3 +1062,86 @@
   * Import the new package in the python code
   ```import package_name```
   > Each time any new updates in the package, change the version and run the setup again
+
+
+-----------
+# Date time module
+```sh
+from datetime import date
+
+today = date.today()
+
+# dd/mm/YY
+d1 = today.strftime("%d/%m/%Y")
+print("d1 =", d1)
+
+# Textual month, day and year	
+d2 = today.strftime("%B %d, %Y")
+print("d2 =", d2)
+
+# mm/dd/y
+d3 = today.strftime("%m/%d/%y")
+print("d3 =", d3)
+
+# Month abbreviation, day and year	
+d4 = today.strftime("%b-%d-%Y")
+print("d4 =", d4)
+```
+
+
+# Important Python Modules for DevOps Automation
+
+## (os module)[https://docs.python.org/3/library/os.html]
+os.ctermid()
+Return the filename corresponding to the controlling terminal of the process.
+
+os.environ
+
+os.chdir(path)
+os.fchdir(fd)
+os.getcwd()
+
+os.fspath(path)
+Return the file system representation of the path.
+
+os.getegid()
+Return the effective group id of the current process. This corresponds to the “set id” bit on the file being executed in the current process.
+
+os.getgid()
+Return the real group id of the current process.
+
+os.geteuid()
+Return the current process’s effective user id.
+
+os.getlogin()
+Return the name of the user logged in on the controlling terminal of the process.
+
+
+## [platform](https://docs.python.org/3/library/platform.html)
+platform.mac_ver()
+('10.14.6', ('', '', ''), 'x86_64')
+
+platform.node()
+'Macbooks-MacBook-Air.local'
+
+platform.processor()
+'i386'
+## [subprocess](https://docs.python.org/3/library/subprocess.html)
+Learn more on this
+
+## [sys](https://docs.python.org/3/library/sys.html)
+This module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter. It is always available.
+
+
+## psutil
+## re (Regular Expression)
+## scapy
+## Requests and urllib3
+## logging
+## getpass
+## boto3
+## paramiko
+## JSON
+## PyYAML
+## pandas: One of the best data science frameworks. However, it is very useful for DevOps automation tasks dealing with CSV files.
+## smtplib 

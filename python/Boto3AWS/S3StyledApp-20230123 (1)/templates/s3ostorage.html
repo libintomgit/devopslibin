@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+ 
+  
+{% block content %}
+
+   
+  <div class="container">
+    <h3 class="text-muted">Amazon S3App Demo</h3>
+      
+
+    <div class="jumbotron">
+      
+      <p>Amazon S3 Demo: Upload and download files to and from your S3 bucket</p>
+    
+      <div>
+        <h3>Upload a file to an S3 bucket:</h3>
+        <form method="POST" action="/upload" enctype=multipart/form-data>
+          <input class="btn btn-lg btn-default" role="button" type=file name=file>
+          <input class="btn btn-lg btn-default" role="button" type=submit value=Upload>
+        </form>
+      </div>
+  
+  
+      <div>
+        <h3>The following are the files stored in the S3 bucket:</h3>
+        <p>Click on the filename to download it.</p>
+        <ul>
+          {% for item in contents %}
+            <li>
+              <a href="/retrieve/{{ item.Key }}"> {{ item.Key }} </a>
+            </li>
+          {% endfor %}
+        </ul>
+  
+      </div>
+    </div>
+  </div>
+{% endblock %}
