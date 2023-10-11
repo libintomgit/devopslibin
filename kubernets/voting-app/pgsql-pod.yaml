@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pgsql-pod
+  namespace: voting
+  labels:
+    name: pgsql-pod
+    app: voting-app
+    comp: pgsql
+    env: db
+    
+spec:
+  containers:
+    - name: pgsql-pod
+      image: postgres
+      ports:
+        - containerPort: 5432
+      env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "postgres"
