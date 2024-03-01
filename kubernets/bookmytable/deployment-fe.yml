@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bmt-fe
+    app-type: frontend
+    environment: dev
+  name: bmt-fe
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bmt-fe
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: bmt-fe
+    spec:
+      containers:
+      - image: libintomdocker/bookmytable-frontend
+        imagePullPolicy: Always
+        name: bmt-fe
+      restartPolicy: Always

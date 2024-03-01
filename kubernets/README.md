@@ -96,3 +96,31 @@ apply the configuration
 `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml`
 
 #Only kubernetes worker nodes
+
+
+--------------------------------------------------------------------------
+kube
+
+* Create Deployment explecitly
+kubectl create deployment bmt-fe --image=libintomdocker/bookmytable-frontend
+
+* Create service to expose the deployment
+kubectl expose deployment bmt-fe --type=NodePort  --port=8000 --target-port=8000
+
+* Export the deployment to yaml configuration >
+kubectl get deployment <deployment-name> -o yaml > <file-name>.yaml
+
+* Export the service to yaml configuration >
+kubectl get svc bmt-fe -o yaml > service-fe.yaml
+
+
+
+#Bookmytable - Frontend
+docker run -p 8000:8000 --name bmt-fe --network bmt-network -e BACKEND_URL=http://bmt-be:8005/api libintomdoc
+ker/bookmytable-frontend
+
+#Bookmytable - Backend
+docker run -d -p 8005:8005 --name bmt-be --network bmt-network -e POSTGRES_PASSWORD=postgres123  libintomdocker/bookmytable-backend:latest
+
+#Bookmytable - Postgres
+docker run --name bmt-postgres --network bmt-network -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres123 -e POSTGRES_DB=bmtbkenddb1 postgres

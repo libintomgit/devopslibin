@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends
 from rest_api_db import engine
 from router import auth, restr, users, address, booking
 import models
-from company import companyapis, dependecies
+# from company import companyapis, dependecies
 from starlette.staticfiles import StaticFiles
 from http import HTTPStatus
 

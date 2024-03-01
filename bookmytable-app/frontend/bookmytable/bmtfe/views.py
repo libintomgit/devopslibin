@@ -2,10 +2,14 @@ from django.shortcuts import render, redirect
 import requests
 from django.http import HttpResponse
 from django.contrib import messages
+import os
+
 
 # Create your views here.
 # api_url = "http://bmt-backend-env-1.eba-9vhdbybw.us-east-1.elasticbeanstalk.com"
-api_url = "https://9hvcx5ulzh.execute-api.us-east-1.amazonaws.com"
+
+# api_url = "http://127.0.0.1:8005/api"
+api_url = os.environ['BACKEND_URL']
 ticket_url = "https://9s287tuhy9.execute-api.us-east-1.amazonaws.com"
 s3_image = "https://bmt-frontend-1.s3.amazonaws.com/cozy-restaurant-tables-ready-dinner-39875776.jpeg"
 nutrition_url = "https://nutrition-by-api-ninjas.p.rapidapi.com/v1/nutrition"
