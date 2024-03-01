@@ -1,6 +1,6 @@
-*/bmt-fe-env/
-*/bmt-be-env/
-/vagrantfile
+
+bmt-be-env/
+vagrantfile
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -165,8 +165,4 @@ cython_debug/
 #.idea/
 
 
-bmt-be-env/*
-bmt-fe-env/*
 bmt-postgres-secret.txt
-bookmytable-app/bmt-fe-env/*
-vagrant/.vagrant/*
