@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bmt-be
+    app-type: backend
+    environment: dev
+  name: bmt-be
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bmt-be
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: bmt-be
+    spec:
+      containers:
+      - image: libintomdocker/bookmytable-backend
+        imagePullPolicy: Always
+        name: bmt-be
+        envFrom:
+        - configMapRef:
+            name: bmt-configmap
+      restartPolicy: Always
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bmt-be
+    app-type: backend
+    environment: dev
+  name: bmt-be
+  namespace: default
+spec:
+  ports:
+  - nodePort:
+    port: 8005
+    protocol: TCP
+    targetPort: 8005
+  selector:
+    app: bmt-be
+  sessionAffinity: None
+  type: NodePort

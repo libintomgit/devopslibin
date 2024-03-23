@@ -26,6 +26,9 @@ spec:
       - image: libintomdocker/bookmytable-frontend
         imagePullPolicy: Always
         name: bmt-fe
+        envFrom:
+        - configMapRef:
+            name: bmt-configmap
       restartPolicy: Always
       
 ---

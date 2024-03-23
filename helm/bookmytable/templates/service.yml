@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: {{ .Values.appName}}
+  labels:
+    app: {{ .Values.app}}
+    appname: {{ .Values.appName}}
+    app-type: {{ .Values.appType}}
+    environment: {{ .Values.infraEnv}}
+  namespace: {{ .Values.namespace}}
+spec:
+  ports:
+  - nodePort:
+    port: {{ .Values.services.spec.ports.port}}
+    protocol: TCP
+    targetPort: {{ .Values.services.spec.ports.targetPort}}
+  selector:
+    appname: {{ .Values.appName}}
+  sessionAffinity: None
+  type: NodePort
