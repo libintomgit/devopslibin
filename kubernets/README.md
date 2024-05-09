@@ -124,3 +124,29 @@ docker run -d -p 8005:8005 --name bmt-be --network bmt-network -e POSTGRES_PASSW
 
 #Bookmytable - Postgres
 docker run --name bmt-postgres --network bmt-network -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres123 -e POSTGRES_DB=bmtbkenddb1 postgres
+
+
+apiversion: apps/v1
+kind: Deployment
+metadata:
+    name:
+    lable:
+    namespace:
+spec:
+    replicas:
+    selector:
+        matchLabels:
+    template:
+        metadata:
+            lables:
+        spec:
+            containers:
+            - name:
+              image: 
+              imagePullPolicy:
+            restartPolicy:
+
+
+
+
+    stratergy:

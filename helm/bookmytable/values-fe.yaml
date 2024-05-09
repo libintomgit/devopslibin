@@ -8,7 +8,7 @@ appType: frontend
 infraEnv: dev
 
 namespace: default
-
+ 
 replicas: 5
 
 image:
