@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: bookmytable-fe
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+        - cluster: in-cluster
+          url: https://kubernetes.default.svc
+          # url: https://192.168.49.2:8443
+        # - cluster: engineering-prod
+        #   url: https://2.4.6.8
+        # - cluster: finance-preprod
+        #   url: https://9.8.7.6
+  template:
+    metadata:
+      name: '{{cluster}}-bookmytable-fe'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/libintomgit/kubernets-manifest-bmt-fe.git
+        targetRevision: HEAD
+        path: ./
+      destination:
+        server: '{{url}}'
+        namespace: bmt-ns
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

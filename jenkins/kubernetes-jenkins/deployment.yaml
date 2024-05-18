@@ -14,12 +14,13 @@ spec:
         app: jenkins-server
     spec:
       securityContext:
-            fsGroup: 1000 
+            fsGroup: 999 
             runAsUser: 1000
       serviceAccountName: jenkins-admin
       containers:
         - name: jenkins
-          image: jenkins/jenkins:lts
+          image: libintomkk/jenkins-docker
+          # image: jenkins/jenkins:lts
           resources:
             limits:
               memory: "2Gi"
@@ -50,8 +51,13 @@ spec:
             failureThreshold: 3
           volumeMounts:
             - name: jenkins-data
-              mountPath: /var/jenkins_home         
+              mountPath: /var/jenkins_home
+            - name: docker-sock
+              mountPath: /var/run/docker.sock         
       volumes:
         - name: jenkins-data
           persistentVolumeClaim:
               claimName: jenkins-pv-claim
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock

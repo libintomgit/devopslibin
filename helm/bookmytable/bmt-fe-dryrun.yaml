@@ -1,0 +1,73 @@
+# Source: bookmytable/templates/configmap.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-bmt-fe
+  labels:
+    app: bookmytble
+    appname: bmt-fe
+  namespace: default
+data:
+  POSTGRES_PASSWORD: 
+  POSTGRES_DB: 
+  BACKEND_URL: http://bmt-be:8005/api
+  POSTGRES_HOST:
+
+---
+# Source: bookmytable/templates/service.yml
+apiVersion: v1
+kind: Service
+metadata: 
+  name: bmt-fe
+  labels:
+    app: bookmytble
+    appname: bmt-fe
+    app-type: frontend
+    environment: dev
+  namespace: default
+spec:
+  ports:
+  - nodePort:
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    appname: bmt-fe
+  sessionAffinity: None
+  type: NodePort
+---
+# Source: bookmytable/templates/deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bmt-fe
+  namespace: default
+  labels:
+    app: bookmytble
+    appname: bmt-fe
+    app-type: frontend
+    environment: dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      appname: bmt-fe
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        appname: bmt-fe
+    spec:
+      containers:
+      - image: "libintomdocker/bookmytable-frontend:latest"
+        imagePullPolicy: Always
+        name: bmt-fe
+        envFrom:
+        - configMapRef:
+            name: configmap-bmt-fe
+      restartPolicy: Always
+

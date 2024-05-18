@@ -1,0 +1,7 @@
+server:
+  service:
+    type: NodePort
+
+pushgateway:
+  service:
+    type: NodePort
