@@ -32,4 +32,4 @@ Nagatiation
 
 
 
-
+helm delete elastic-libin -n devops-tools
