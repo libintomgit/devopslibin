@@ -67,23 +67,55 @@ Delivered excellent customer service
 Situation:
 In a previous role as a DevOps infrastructure engineer, I was responsible for managing our company's cloud infrastructure. One day, we encountered a critical issue where a production server went down unexpectedly during peak hours, affecting our customers' ability to access our services.
 
-When you made a mistake
+## When you made a mistake
 
 Situation:
 In a previous project, I was tasked with implementing a new CI/CD pipeline to automate the deployment process for our applications. The goal was to streamline development workflows and accelerate the delivery of new features to production.
 
-When disagreed with your boss
+## When disagreed with your boss
 
 Situation:
-In a previous role, I was working on a project where we were transitioning our infrastructure to a cloud-based environment. As part of this transition, my team and I were responsible for selecting the cloud provider and designing the architecture for our applications.
+In a previous role, I was working on a project where we were transitioning our infrastructure to a cloud-based environment. As part of this transition, my team and I were responsible for selecting the cloud provider and designing the architecture for our applications. I knew that most of my teammates were proffecient in the AWS but Azure was providing the credits with was significant in terms of cost.
 
-solve a difficlut problem
-SITUATION
+But I had to explain the manager about the teams strength and also a constructive document to show that in the long run that it might not make much difference in terms of cost. 
 
-In a previous role as devops infrastructure engineer, one of the application infrastructure experienced critical performance issue during peak hours. Users were experiencing significant latency and occational downtime, impacting the overall userexperience and revenue.It was crusial to identify the root cause and fix the problem immediately.
+As an action I have tried to explore the cost in both providers and could provide some what level of data and also requested the manager that we can setup a multicloud environment and monitor for a certain period for the cost difference and also the operational overhead and take a right decision later without imacting the application.
 
-you had a conflict with a co-worker
+As result manager approved the request and also appriciated the approach and this approach will not impact the application availability in case of low knowledge in the new environment.
+
+
+## you had a conflict with a co-worker
+
 There were many situations and almost they occurs when the expectations is not set very clearly among the team on each individuals roles and responsibilities i belive.
 
 SITUATION
-but apart from that, I remember, in one of my project to we had to automate the container deployment for a new application. I had proposed the a system using Terraform, Jenkins, Spinaker, Helm and AKS but my colleague had a different approch in mind using Azure Devops which he was more femilier with. This led to a conflict between us.
+but apart from that, I remember, in one of my project to we had to automate the container deployment for a new application. I had proposed the a system using Terraform, Jenkins, Argocd, Helm and AKS but my colleague had a different approch in mind using Azure Devops which he was more femilier with. This led to a conflict between us.
+
+Task:
+I took an initiative to resolve this conflict by communicating with my workmate and take a constructive decision to finalise the proposal.
+
+Action:
+As an action I have initiated the discussion and listend actively to understand his thought process and I have explained him my reason for the proposal as I was more concerned about the managibility in the future becasue most of us in the team had only experience with jenikins and with such level of work pressure it would have been challanging to learn and troubleshoot a new tool. On top jenkins was already available. However I suggested that we can use try his proposal in a POC type setup or with a low priority application and once everyone gets inline with the system we can implement the same to higher priority application if required.
+
+Result:
+As a result of the discussion, we both came to conclussion and were on the same page and the conflict was resolved between us. Also our manager was very happy with our approch to work together to come to a conclusion proactively with improved the relationship with our manager.
+
+
+## Tell me about a time when you faced challenging problem at work and how did you handle it ?
+
+Stituation:
+Application moniroting was reporting intermitent connection issue to kafka service from the producers and consumers. Kafka was under loadbalancer type service and a public network loadbalancer was running.
+
+Taks was to indentify the root couse and implement the solution.
+
+As an action I started to look at the logs of load balancers and applications, however no construct log evidence was available to find the root cause. Further I tought of checking the port connection activity continuously using telnet in the watch tool for every 2 secods and noticed that the ip address was changing each time to public and private ip address. So I checked the loadbalancer subnets and understood that the it had 2 subnets and one of them was private which triggered some thing worng and I check the aws cloud trail for all the cloud api changes. That provided and idea that private subnet was add recently to the loadbalancer becasue one of the site reliablity engineer created a private subnet as the IPs for one of the node group in the same cluser was exhausted however he copied all the tags from this subnet and the kubernetes watched for the same and added the subnet to the LB. To resolve the issue i had recreate the loadbalcer and its not possible to remove the subnet once added to the loadbalancer.
+
+As a result the issue was resolved permanently and also added a manual check in the documentation to avoid such issues in the future. Also shared this root cause anlaysis report within the enineering team for the transparancy.
+
+you had to work as part of a team. What was your role, and how did you contribute?
+
+## solve a difficlut problem
+
+SITUATION
+
+In a previous role as devops infrastructure engineer, one of the application infrastructure experienced critical performance issue during peak hours. Users were experiencing significant latency and occational downtime, impacting the overall userexperience and revenue.It was crusial to identify the root cause and fix the problem immediately.

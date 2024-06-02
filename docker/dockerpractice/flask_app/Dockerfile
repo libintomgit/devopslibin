@@ -51,3 +51,32 @@ CMD ["--port= 5000"]
 # HEALTHCHECK --interval=5s --timeout=5s --start-period=2s --retries=2 \
 #     CMD wget --no-verbose --tries=1 --spider http://localhost/tom || exit 1
 
+
+
+
+# FROM ubuntu
+# ARG user=user123
+
+# USER ${user}
+
+# WORKDIR /app
+
+# ENV DB_USER_NAME = username
+
+# RUN apt update && apt install nginx -y 
+
+# COPY . .
+
+# ADD filename.tar.gz ./data
+
+# LABEL created_by=email@email.com
+
+# ENTRYPOINT ["command", ["commadan"]]
+
+# CMD ["arg to entry point"]
+
+# EXPOSE 80
+
+# VOLUME /data:./data1
+
+# HELTHCHEK

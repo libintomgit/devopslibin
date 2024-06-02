@@ -166,3 +166,4 @@ cython_debug/
 
 
 bmt-postgres-secret.txt
+python/jira-github-inte/
