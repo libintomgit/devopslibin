@@ -1,0 +1,3 @@
+[submodule "terraform/terraform-eks"]
+	path = terraform/terraform-eks
+	url = git@github.com:iam-veeramalla/terraform-eks.git

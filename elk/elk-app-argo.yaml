@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: elk-stack
+  namespace: devops-tools
+spec:
+  project: devops-tools
+  source:
+    chart: ''
+    # chart: elastic/eck-stack
+    # repoURL: https://helm.elastic.co
+    repoURL: oci://registry-1.docker.io/bitnamicharts/elasticsearch
+    targetRevision: 1.0.0
+    helm:
+      releaseName: elk-stack
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: devops-tools
+
+
+# argocd app create elk-stack --repo https://helm.elastic.com --path elastic/eck-stack --dest-namespace devops-tools --dest-server https://kubernetes.default.svc --helm-set replicaCount=2

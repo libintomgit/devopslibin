@@ -1,0 +1,27 @@
+
+app: bookmytble
+
+appName: bmt-fe
+
+appType: frontend
+
+infraEnv: dev
+
+namespace: default
+ 
+replicas: 5
+
+image:
+  name: libintomdocker/bookmytable-frontend
+  tag: latest
+
+configmap: 
+  name: configmap-bmt-fe
+  data:
+    BACKEND_URL: http://bmt-be:8005/api
+
+services:
+  spec:
+    ports:
+      port: 8000
+      targetPort: 8000

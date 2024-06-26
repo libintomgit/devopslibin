@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bmt-pgsql
+    app-type: db
+    environment: dev
+  name: bmt-pgsql
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bmt-pgsql
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: bmt-pgsql
+    spec:
+      containers:
+      - image: postgres
+        imagePullPolicy: Always
+        name: bmt-pgsql
+        envFrom:
+        - configMapRef:
+            name: bmt-configmap
+      restartPolicy: Always
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bmt-pgsql
+    app-type: db
+    environment: db
+  name: bmt-pgsql
+  namespace: default
+spec:
+  ports:
+  - nodePort:
+    port: 5432
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    app: bmt-pgsql
+  sessionAffinity: None
+  type: NodePort

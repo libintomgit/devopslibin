@@ -1,0 +1,7 @@
+http:
+  service:
+    spec:
+      # Type of service to deploy for Kibana.
+      # This deploys a load balancer in a cloud service provider, where supported.
+      # 
+      type: LoadBalancer

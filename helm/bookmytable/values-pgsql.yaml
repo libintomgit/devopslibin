@@ -1,0 +1,28 @@
+
+app: bookmytble
+
+appName: bmt-pgsql
+
+appType: db
+
+infraEnv: dev
+
+namespace: default
+
+replicas: 1
+
+image:
+  name: postgres
+  tag: latest
+
+configmap: 
+  name: configmap-bmt
+  data:
+    POSTGRES_PASSWORD: postgres123
+    POSTGRES_DB: bmtbkenddb1
+
+services:
+  spec:
+    ports:
+      port: 5432
+      targetPort: 5432

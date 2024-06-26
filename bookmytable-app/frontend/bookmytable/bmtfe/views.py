@@ -3,8 +3,9 @@ import requests
 from django.http import HttpResponse
 from django.contrib import messages
 import os
+from prometheus_client import start_http_server, Summary, CONTENT_TYPE_LATEST, generate_latest
 
-
+REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
 # Create your views here.
 # api_url = "http://bmt-backend-env-1.eba-9vhdbybw.us-east-1.elasticbeanstalk.com"
 
@@ -15,6 +16,7 @@ s3_image = "https://bmt-frontend-1.s3.amazonaws.com/cozy-restaurant-tables-ready
 nutrition_url = "https://nutrition-by-api-ninjas.p.rapidapi.com/v1/nutrition"
 
 # Get request to backend service to fetch all the restaurants
+@REQUEST_TIME.time()
 def index(request):
     try:
         headers = {'Accept': 'application/json'}
@@ -206,3 +208,12 @@ def formHandler(request):
     form_dat = request.POST
     print(form_dat)
     return render(request, 'bmtfe/forms.html', context=mydict)
+
+#Prometheus Endpoint - Libin
+def prometheus_metrics(request):
+    """
+    View function to generate and return Prometheus metrics.
+    """
+    response = HttpResponse(content_type=CONTENT_TYPE_LATEST)
+    response.write(generate_latest())
+    return response
